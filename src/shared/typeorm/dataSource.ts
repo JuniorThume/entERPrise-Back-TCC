@@ -1,12 +1,13 @@
 import { DataSource } from 'typeorm';
+import { CreateProducts1718830788772 } from './migrations/1718830788772-CreateProducts';
 
 export const data_source = new DataSource({
-  type: 'mysql',
-  host: '?',
-  port: 2222,
-  username: '?',
-  password: '?',
-  database: 'StokService',
+  type: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: 'admin',
+  database: 'postgres',
   entities: [],
-  migrations: []
+  migrations: [CreateProducts1718830788772]
 });
