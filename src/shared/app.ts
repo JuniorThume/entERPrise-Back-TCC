@@ -1,15 +1,15 @@
-import 'reflect-metadata';
 import express from 'express';
-import 'dotenv/config';
-
+import cors from 'cors';
+import routes from './routes/index';
 const app = express();
 
-app.use(express.json());
-
+// app.use(express.json());
+app.use(cors());
 app.get('/', (req, res) => {
   return res.status(200).json({
     message: 'Start Route with TS-NODE-DEV'
   });
 });
+app.use(routes);
 
-app.listen(process.env.APP_PORT);
+export default app;
