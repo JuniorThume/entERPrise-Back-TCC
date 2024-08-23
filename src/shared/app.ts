@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
-import routes from './typeorm/routes/index';
+import routes from './routes/index';
 import { data_source } from './typeorm/dataSource';
 const app = express();
 
