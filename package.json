@@ -13,7 +13,9 @@
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "ts-node": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules/*  -- src/index.ts",
-    "typeorm": "typeorm"
+    "typeorm": "typeorm",
+    "typeorm-create-migration": "npx typeorm migration:create",
+    "typeorm-run-migrations": "npx typeorm-ts-node-commonjs migration:run -d ./src/shared/typeorm/dataSource.ts"
   },
   "author": "Valmir Thume Junior",
   "license": "MIT",
