@@ -8,14 +8,14 @@
     "test-watch": "jest --watch",
     "build": "npx tsc",
     "start": "node build/server.js",
-    "dev": "nodemon src/shared/server.ts",
+    "dev": "ts-node-dev src/shared/server.ts",
     "prettier-format": "prettier --config .prettierrc --write src/**/*.ts",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
-    "ts-node": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules/*  -- src/index.ts",
-    "typeorm": "typeorm",
+    "ts-node": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules/*  -- src/shared/server.ts",
     "typeorm-create-migration": "npx typeorm migration:create",
-    "typeorm-run-migrations": "npx typeorm-ts-node-commonjs migration:run -d ./src/shared/typeorm/dataSource.ts"
+    "typeorm-run-migrations": "npx typeorm-ts-node-commonjs migration:run -d ./src/shared/typeorm/dataSource.ts",
+    "typeorm-revert-migrations": "npx typeorm-ts-node-commonjs migration:revert -d ./src/shared/typeorm/dataSource.ts"
   },
   "author": "Valmir Thume Junior",
   "license": "MIT",
