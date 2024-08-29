@@ -1,8 +1,9 @@
+import { ProductInfo } from '../../infra/models/ProductInfos';
 import { Product } from '../../infra/models/Products';
 import { IFilter } from '../models/IFilter';
 
 export interface IProductRepository {
-  insert(product: Product): Promise<Product>;
+  insert(product: Product, product_info: ProductInfo): Promise<Product | null>;
   update(product: Product): Promise<Product>;
   delete(id: number): Promise<void>;
   findAll(): Promise<Product[]>;

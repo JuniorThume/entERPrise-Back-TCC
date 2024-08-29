@@ -1,19 +1,7 @@
 import { Router } from 'express';
-
+import ProductRouter from '../../modules/products/infra/routes/product.routes';
 const router = Router();
 
-const route1 = router.get('/route1', (req, res) => {
-  res.status(200).send('Router 1');
-});
-
-const route2 = router.get('/route2', (req, res) => {
-  res.status(200).send('Router 2');
-});
-
-router.use('/api/v1', [route1, route2]);
-
-router.use((req, res) => {
-  res.status(404).send('Not Found');
-});
+router.use('/products', ProductRouter);
 
 export default router;
