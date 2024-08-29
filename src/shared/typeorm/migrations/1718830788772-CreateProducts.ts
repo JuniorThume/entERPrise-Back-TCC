@@ -28,8 +28,25 @@ export class CreateProducts1718830788772 implements MigrationInterface {
             length: '255'
           },
           {
-            name: 'infos_id',
-            type: 'int'
+            name: 'category',
+            type: 'varchar'
+          },
+          {
+            name: 'material',
+            type: 'varchar'
+          },
+          {
+            name: 'gender',
+            type: 'varchar'
+          },
+          {
+            name: 'brand',
+            type: 'varchar'
+          },
+          {
+            name: 'image_url',
+            type: 'varchar',
+            isNullable: true
           }
         ]
       })
@@ -58,25 +75,21 @@ export class CreateProducts1718830788772 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'material',
-            type: 'varchar'
+            name: 'prize',
+            type: 'decimal'
           },
           {
-            name: 'gender',
-            type: 'varchar'
-          },
-          {
-            name: 'brand',
-            type: 'varchar'
+            name: 'product_id',
+            type: 'int'
           }
         ]
       })
     );
     await queryRunner.createForeignKey(
-      'products',
+      'product_infos',
       new TableForeignKey({
-        columnNames: ['infos_id'],
-        referencedTableName: 'product_infos',
+        columnNames: ['product_id'],
+        referencedTableName: 'products',
         referencedColumnNames: ['id'],
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
