@@ -1,4 +1,4 @@
-import { IFilter } from '../domain/models/IFilter';
+import ValidationError from '../../../shared/errors/ValidationError';
 import { Product } from '../infra/models/Products';
 import { ProductRepository } from '../infra/repositories/ProductRepository';
 
@@ -8,8 +8,14 @@ class ShowProductService {
     this.productRepository = new ProductRepository();
   }
 
-  async execute(filter: IFilter): Promise<Product | null> {
-    const product = this.productRepository.findOneByFilter(filter);
+  async execute(id: number): Promise<Product | null> {
+    const product = await this.productRepository.findById(id);
+    if (!product) {
+      throw new ValidationError('Produto nao encontrado', {
+        status: 'Nao foi possivel encontrar o produto preterido',
+        id: id
+      });
+    }
 
     return product;
   }

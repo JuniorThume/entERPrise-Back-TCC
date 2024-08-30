@@ -1,17 +1,21 @@
-class ValidationError {
+import { errors } from '../consts/errors';
+import { status_code } from '../consts/statusCode';
+
+class ValidationError extends Error {
   public code: number;
-  public message: string;
+  public name: string;
   public details: object;
 
   constructor(message: string, details: object) {
-    this.code = 400;
-    this.message = message;
+    super(message);
+    this.code = status_code.BAD_REQUEST;
     this.details = details;
+    this.name = errors.ValidationError;
   }
 
   public returnAsJSON() {
     return {
-      code: this.code,
+      error: this.name,
       message: this.message,
       details: this.details
     };

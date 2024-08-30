@@ -1,20 +1,24 @@
 import { NextFunction, Request, Response } from 'express';
 import { AppError } from './AppError';
+import ValidationError from './ValidationError';
+import { isCelebrateError } from 'celebrate';
 
 function HandleErrors(
-  err: AppError,
+  err: AppError | ValidationError,
   request: Request,
   response: Response,
   next: NextFunction // eslint-disable-line
 ) {
   if (err instanceof AppError) {
-    return response
-      .status(err._code)
-      .json({ error: err._name, message: err.message, details: err._details });
+    return response.status(err._code).json(err);
+  } else if (err instanceof ValidationError) {
+    return response.status(err.code).json(err.returnAsJSON());
+  } else if (isCelebrateError(err)) {
+    return response.status(400).json(err);
   } else {
     return response.status(500).json({
       error: 'Internal Server Error',
-      message: 'Algo acontece e o servidor nao soube lidar com isso'
+      message: 'Houve algum erro que o servidor não soube lidar'
     });
   }
 }
