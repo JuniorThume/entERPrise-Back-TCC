@@ -18,7 +18,9 @@ export const create_product_validator = celebrate(
         prize: Joi.number().positive().required(),
         quantity: Joi.number().required()
       }).unknown(false)
-    })
+    }),
+    [Segments.QUERY]: Joi.object({}).unknown(false),
+    [Segments.PARAMS]: Joi.object({}).unknown(false)
   },
   { abortEarly: false }
 );
@@ -38,19 +40,36 @@ export const update_product_validator = celebrate(
       .unknown(false),
     [Segments.PARAMS]: Joi.object({
       id: Joi.number().required()
-    }).unknown(false)
+    }).unknown(false),
+    [Segments.QUERY]: Joi.object({}).unknown(false)
   },
   { abortEarly: false }
 );
 
+export const list_product_validator = celebrate({
+  [Segments.QUERY]: Joi.object({
+    name: Joi.string().max(100).optional(),
+    category: Joi.string().optional(),
+    brand: Joi.string().optional(),
+    material: Joi.string().optional(),
+    gender: Joi.string().optional()
+  }).unknown(false),
+  [Segments.BODY]: Joi.object({}).unknown(false),
+  [Segments.PARAMS]: Joi.object({}).unknown(false)
+});
+
 export const show_product_validator = celebrate({
   [Segments.PARAMS]: {
     id: Joi.number().required()
-  }
+  },
+  [Segments.QUERY]: Joi.object({}).unknown(false),
+  [Segments.BODY]: Joi.object({}).unknown(false)
 });
 
 export const delete_product_validator = celebrate({
   [Segments.PARAMS]: {
     id: Joi.number().required()
-  }
+  },
+  [Segments.QUERY]: Joi.object({}).unknown(false),
+  [Segments.BODY]: Joi.object({}).unknown(false)
 });

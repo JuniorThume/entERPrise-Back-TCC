@@ -1,8 +1,7 @@
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
 import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import { IFilter } from '../../domain/models/IFilter';
 import { ProductInfo } from '../models/ProductInfos';
 
 export class ProductRepository implements IProductRepository {
@@ -52,14 +51,8 @@ export class ProductRepository implements IProductRepository {
     return productRemoved;
   }
 
-  async findAll(): Promise<Product[]> {
-    const products = await this.ormProductRepository.find();
-
-    return products;
-  }
-
-  async findOneByFilter(filter: IFilter): Promise<Product | null> {
-    const product = await this.ormProductRepository.findOne({ where: filter });
+  async findByFilter(options: FindManyOptions): Promise<Product[] | null> {
+    const product = await this.ormProductRepository.find(options);
 
     return product;
   }
@@ -76,7 +69,7 @@ export class ProductRepository implements IProductRepository {
     const product = await this.ormProductRepository.find({
       where: { name: name }
     });
-
+    console.log(product);
     return product;
   }
 

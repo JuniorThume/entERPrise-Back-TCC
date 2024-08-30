@@ -18,7 +18,6 @@ export class ProductController {
       product,
       product_info
     );
-    // TODO Entender como o express-async-errors funciona
 
     return response.status(status_code.CREATED).json(productCreated);
   }
@@ -40,8 +39,9 @@ export class ProductController {
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
+    const filter = request.query;
     const listProductService = new ListProductService();
-    const products = await listProductService.execute();
+    const products = await listProductService.execute(filter);
 
     return response.status(status_code.OK).json(products);
   }

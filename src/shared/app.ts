@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
   });
 });
 
-app.use('api/v1/', routes);
+app.use('/api/v1', routes);
 app.use((request: Request, response: Response, next: NextFunction) => { //eslint-disable-line
   return response.status(404).json({ message: 'page not found' });
 });

@@ -13,11 +13,8 @@ class CreateProductService {
     product: Product,
     productInfo: ProductInfo
   ): Promise<Product | null> {
-    if (
-      await this.productRepository.findOneByFilter({
-        name: product.name
-      })
-    ) {
+    const productExists = await this.productRepository.findByName(product.name);
+    if (productExists?.length) {
       throw new ValidationError('Já existe um produto com este nome', product);
     }
 
