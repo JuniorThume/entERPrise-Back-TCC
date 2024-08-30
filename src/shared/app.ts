@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import 'express-async-errors';
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes/index';
 import { errors } from 'celebrate';
@@ -18,9 +18,12 @@ app.get('/', async (req, res) => {
   });
 });
 
-app.use(routes);
+app.use('api/v1/', routes);
+app.use((request: Request, response: Response, next: NextFunction) => { //eslint-disable-line
+  return response.status(404).json({ message: 'page not found' });
+});
 
-app.use(HandleErrors);
 app.use(errors());
+app.use(HandleErrors);
 
 export default app;

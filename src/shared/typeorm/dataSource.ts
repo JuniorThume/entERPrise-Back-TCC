@@ -11,6 +11,5 @@ export const data_source = new DataSource({
   password: 'admin',
   database: 'postgres',
   entities: [Product, ProductInfo],
-  synchronize: true,
   migrations: [CreateProducts1718830788772]
 });

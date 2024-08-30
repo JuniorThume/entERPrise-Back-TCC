@@ -91,8 +91,7 @@ export class CreateProducts1718830788772 implements MigrationInterface {
         columnNames: ['product_id'],
         referencedTableName: 'products',
         referencedColumnNames: ['id'],
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
+        onDelete: 'CASCADE'
       })
     );
   }
