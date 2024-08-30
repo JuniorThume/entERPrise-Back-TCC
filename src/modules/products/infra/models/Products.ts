@@ -28,6 +28,8 @@ export class Product implements IProduct {
   @Column('varchar')
   brand!: string;
 
-  @OneToMany(() => ProductInfo, (infos) => infos.id)
+  @OneToMany(() => ProductInfo, (infos) => infos.id, {
+    cascade: true
+  })
   infos_id!: ProductInfo[];
 }

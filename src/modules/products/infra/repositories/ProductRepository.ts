@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
@@ -30,14 +30,26 @@ export class ProductRepository implements IProductRepository {
     return productCreated;
   }
 
-  async update(product: Product): Promise<Product> {
-    const productUpdated = await this.ormProductRepository.save(product);
+  async update(id: number, product: Product): Promise<Product | null> {
+    const _product = await this.ormProductRepository.findOne({
+      where: {
+        id: id
+      }
+    });
 
+    if (!_product) {
+      return null;
+    }
+
+    this.ormProductRepository.merge(_product, product);
+    const productUpdated = await this.ormProductRepository.save(_product);
     return productUpdated;
   }
 
-  async delete(id: number): Promise<void> {
-    await this.ormProductRepository.delete({ id: id });
+  async delete(id: number): Promise<DeleteResult> {
+    const productRemoved = await this.ormProductRepository.delete({ id: id });
+
+    return productRemoved;
   }
 
   async findAll(): Promise<Product[]> {
