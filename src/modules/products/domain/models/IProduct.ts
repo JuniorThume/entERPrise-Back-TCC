@@ -1,8 +1,10 @@
-import { ProductInfo } from '../../infra/models/ProductInfos';
-
 export interface IProduct {
   id: number;
+  image_url?: string;
   name: string;
   description: string;
-  infos_id: ProductInfo;
+  category: string;
+  material: string;
+  gender: string;
+  brand: string;
 }

@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ProductInfo } from './ProductInfos';
 import { IProduct } from '../../domain/models/IProduct';
 
@@ -17,9 +11,23 @@ export class Product implements IProduct {
   name!: string;
 
   @Column('varchar')
+  image_url!: string;
+
+  @Column('varchar')
   description!: string;
 
-  @OneToOne(() => ProductInfo)
-  @JoinColumn({ name: 'infos_id' })
-  infos_id!: ProductInfo;
+  @Column('varchar')
+  category!: string;
+
+  @Column('varchar')
+  material!: string;
+
+  @Column('varchar')
+  gender!: string;
+
+  @Column('varchar')
+  brand!: string;
+
+  @OneToMany(() => ProductInfo, (infos) => infos.id)
+  infos_id!: ProductInfo[];
 }

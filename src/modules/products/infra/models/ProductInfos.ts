@@ -1,5 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 import { IProductInfos } from '../../domain/models/IProductInfos';
+import { Product } from './Products';
 
 @Entity('product_infos')
 export class ProductInfo implements IProductInfos {
@@ -15,12 +22,10 @@ export class ProductInfo implements IProductInfos {
   @Column('varchar')
   color!: string;
 
-  @Column('varchar')
-  material!: string;
+  @Column('decimal')
+  prize!: number;
 
-  @Column('varchar')
-  gender!: string;
-
-  @Column('varchar')
-  brand!: string;
+  @ManyToOne(() => Product, (product) => product.id)
+  @JoinColumn({ name: 'product_id' })
+  product_id!: Product;
 }
