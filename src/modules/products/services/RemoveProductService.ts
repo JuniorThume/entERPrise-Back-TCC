@@ -1,12 +1,14 @@
 import { DeleteResult } from 'typeorm';
 import { AppError } from '../../../shared/errors/AppError';
 import { ProductRepository } from '../infra/repositories/ProductRepository';
+import { inject, injectable } from 'tsyringe';
 
+@injectable()
 class RemoveProductService {
-  private productRepository: ProductRepository;
-  constructor() {
-    this.productRepository = new ProductRepository();
-  }
+  constructor(
+    @inject('ProductRepository')
+    private productRepository: ProductRepository
+  ) {}
 
   async execute(id: number): Promise<DeleteResult> {
     const productExists = await this.productRepository.findById(id);

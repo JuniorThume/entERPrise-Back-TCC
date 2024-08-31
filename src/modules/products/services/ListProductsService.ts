@@ -2,12 +2,14 @@ import { FindManyOptions, Like } from 'typeorm';
 import { IFilter } from '../domain/models/IFilter';
 import { Product } from '../infra/models/Products';
 import { ProductRepository } from '../infra/repositories/ProductRepository';
+import { inject, injectable } from 'tsyringe';
 
+@injectable()
 class ListProductService {
-  private productRepository: ProductRepository;
-  constructor() {
-    this.productRepository = new ProductRepository();
-  }
+  constructor(
+    @inject('productRepository')
+    private productRepository: ProductRepository
+  ) {}
 
   async execute(filter: IFilter): Promise<Product[] | null> {
     const options: FindManyOptions = {

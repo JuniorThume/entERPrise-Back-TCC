@@ -1,14 +1,16 @@
+import { inject, injectable } from 'tsyringe';
 import { status_code } from '../../../shared/consts/statusCode';
 import { AppError } from '../../../shared/errors/AppError';
 import ValidationError from '../../../shared/errors/ValidationError';
 import { Product } from '../infra/models/Products';
 import { ProductRepository } from '../infra/repositories/ProductRepository';
 
+@injectable()
 class UpdateProductService {
-  private productRepository: ProductRepository;
-  constructor() {
-    this.productRepository = new ProductRepository();
-  }
+  constructor(
+    @inject('ProductRepository')
+    private productRepository: ProductRepository
+  ) {}
 
   async execute(id: number, product: Product): Promise<Product | null> {
     const productExists = await this.productRepository.findById(id);

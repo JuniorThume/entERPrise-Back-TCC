@@ -5,6 +5,7 @@ import ShowProductService from '../../services/ShowProductService';
 import ListProductService from '../../services/ListProductsService';
 import { status_code } from '../../../../shared/consts/statusCode';
 import UpdateProductService from '../../services/UpdateProductService';
+import { container } from 'tsyringe';
 
 export class ProductController {
   public async insert(
@@ -12,8 +13,8 @@ export class ProductController {
     response: Response,
     next: NextFunction //eslint-disable-line 
   ): Promise<Response> {
-    const createProductService = new CreateProductService();
     const { product, product_info } = request.body;
+    const createProductService = container.resolve(CreateProductService);
     const productCreated = await createProductService.execute(
       product,
       product_info
@@ -24,14 +25,15 @@ export class ProductController {
 
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const removeProductService = new RemoveProductService();
+
+    const removeProductService = container.resolve(RemoveProductService);
     await removeProductService.execute(Number(id));
 
     return response.status(status_code.NO_CONTENT).json();
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const showProductService = new ShowProductService();
+    const showProductService = container.resolve(ShowProductService);
     const id: number = Number(request.params.id);
     const product = await showProductService.execute(id);
 
@@ -40,7 +42,7 @@ export class ProductController {
 
   public async list(request: Request, response: Response): Promise<Response> {
     const filter = request.query;
-    const listProductService = new ListProductService();
+    const listProductService = container.resolve(ListProductService);
     const products = await listProductService.execute(filter);
 
     return response.status(status_code.OK).json(products);
@@ -49,7 +51,7 @@ export class ProductController {
   public async update(request: Request, response: Response): Promise<Response> {
     const id = Number(request.params.id);
     const { ...rest } = request.body;
-    const updateProductService = new UpdateProductService();
+    const updateProductService = container.resolve(UpdateProductService);
     const productUpdated = await updateProductService.execute(id, rest);
 
     return response.status(status_code.OK).json(productUpdated);
