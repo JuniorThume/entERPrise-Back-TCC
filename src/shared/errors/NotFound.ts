@@ -1,16 +1,16 @@
 import { errors } from '../consts/errors';
 import { status_code } from '../consts/statusCode';
 
-class ValidationError extends Error {
+class NotFound extends Error {
   public code: number;
   public name: string;
-  public details: object;
+  public details?: object;
 
-  constructor(message: string, details: object) {
+  constructor(message: string, details?: object) {
     super(message);
-    this.code = status_code.BAD_REQUEST;
+    this.code = status_code.NOT_FOUND;
     this.details = details;
-    this.name = errors.ValidationError;
+    this.name = errors.NotFound;
   }
 
   public returnAsJSON() {
@@ -22,4 +22,4 @@ class ValidationError extends Error {
   }
 }
 
-export default ValidationError;
+export default NotFound;

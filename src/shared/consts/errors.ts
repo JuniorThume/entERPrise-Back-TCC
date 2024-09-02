@@ -1,4 +1,5 @@
 export enum errors {
   AppError = 'AppError',
-  ValidationError = 'ValidationError'
+  BadRequest = 'Bad Request',
+  NotFound = 'NotFound'
 }
