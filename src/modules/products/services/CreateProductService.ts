@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import ValidationError from '../../../shared/errors/ValidationError';
+import ValidationError from '../../../shared/errors/BadRequest';
 import { ProductInfo } from '../infra/models/ProductInfos';
 import { Product } from '../infra/models/Products';
 import { ProductRepository } from '../infra/repositories/ProductRepository';

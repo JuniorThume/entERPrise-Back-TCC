@@ -6,7 +6,7 @@ import {
   list_product_validator,
   show_product_validator,
   update_product_validator
-} from '../validation/CreateProductValidation';
+} from '../validation/ProductValidation';
 import infosRouter from './infos.routes';
 const router = Router();
 const productsController = new ProductController();
@@ -17,6 +17,6 @@ router.get('/', list_product_validator, productsController.list);
 router.get('/:id', show_product_validator, productsController.show);
 router.delete('/:id', delete_product_validator, productsController.delete);
 
-router.use('/:id/infos', infosRouter);
+router.use(infosRouter);
 
 export default router;

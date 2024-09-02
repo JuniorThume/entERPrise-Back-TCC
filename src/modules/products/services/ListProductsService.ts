@@ -7,7 +7,7 @@ import { inject, injectable } from 'tsyringe';
 @injectable()
 class ListProductService {
   constructor(
-    @inject('productRepository')
+    @inject('ProductRepository')
     private productRepository: ProductRepository
   ) {}
 

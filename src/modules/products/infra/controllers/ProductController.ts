@@ -7,7 +7,7 @@ import { status_code } from '../../../../shared/consts/statusCode';
 import UpdateProductService from '../../services/UpdateProductService';
 import { container } from 'tsyringe';
 
-export class ProductController {
+class ProductController {
   public async insert(
     request: Request,
     response: Response,
@@ -57,3 +57,5 @@ export class ProductController {
     return response.status(status_code.OK).json(productUpdated);
   }
 }
+
+export { ProductController };
