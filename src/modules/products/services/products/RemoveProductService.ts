@@ -1,6 +1,6 @@
 import { DeleteResult } from 'typeorm';
-import { AppError } from '../../../shared/errors/AppError';
-import { ProductRepository } from '../infra/repositories/ProductRepository';
+import { AppError } from '../../../../shared/errors/AppError';
+import { ProductRepository } from '../../infra/repositories/ProductRepository';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

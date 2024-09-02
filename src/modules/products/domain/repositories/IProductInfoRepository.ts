@@ -1,6 +1,7 @@
 import { DeleteResult, FindManyOptions } from 'typeorm';
 import { ProductInfo } from '../../infra/models/ProductInfos';
 import { IProductInfos } from '../models/IProductInfos';
+import { Product } from '../../infra/models/Products';
 
 export interface IProductInfoRepository {
   insert(product_info: IProductInfos): Promise<ProductInfo | null>;
@@ -9,5 +10,6 @@ export interface IProductInfoRepository {
   findByFilter(options: FindManyOptions): Promise<ProductInfo[] | null>;
   findById(id: number): Promise<ProductInfo | null>;
   findBySize(size: string): Promise<ProductInfo[] | null>;
-  checkSize(size: string): Promise<boolean>;
+  // checkSize(size: string): Promise<boolean>;
+  infoBelongToProduct(product: Product, id: number): Promise<boolean>;
 }

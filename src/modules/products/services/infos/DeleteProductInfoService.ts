@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
-import { ProductInfoRepository } from '../infra/repositories/ProductInfoRepository';
+import { ProductInfoRepository } from '../../infra/repositories/ProductInfoRepository';
 import { DeleteResult } from 'typeorm';
-import NotFound from '../../../shared/errors/NotFound';
-import { ProductRepository } from '../infra/repositories/ProductRepository';
+import NotFound from '../../../../shared/errors/NotFound';
+import { ProductRepository } from '../../infra/repositories/ProductRepository';
 
 @injectable()
 class DeleteProductInfoService {

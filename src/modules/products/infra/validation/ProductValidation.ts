@@ -15,7 +15,7 @@ export const create_product_validator = celebrate(
       product_info: Joi.object({
         size: Joi.string().required(),
         color: Joi.string().required(),
-        prize: Joi.number().positive().required(),
+        prize: Joi.number().greater(0).required(),
         quantity: Joi.number().required()
       }).unknown(false)
     }),

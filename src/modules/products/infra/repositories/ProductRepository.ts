@@ -1,4 +1,4 @@
-import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
+import { DeleteResult, FindManyOptions, Like, Repository } from 'typeorm';
 import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
@@ -52,6 +52,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   async findByFilter(options: FindManyOptions): Promise<Product[] | null> {
+    Object.assign(options, { relations: ['infos'] });
     const product = await this.ormProductRepository.find(options);
 
     return product;
@@ -59,7 +60,8 @@ export class ProductRepository implements IProductRepository {
 
   async findById(id: number): Promise<Product | null> {
     const product = await this.ormProductRepository.findOne({
-      where: { id: id }
+      where: { id: id },
+      relations: ['infos']
     });
 
     return product;
@@ -67,14 +69,18 @@ export class ProductRepository implements IProductRepository {
 
   async findByName(name: string): Promise<Product[] | null> {
     const product = await this.ormProductRepository.find({
-      where: { name: name }
+      where: { name: Like(`%${name}%`) },
+      relations: ['infos']
     });
-    console.log(product);
+
     return product;
   }
 
   async findByDescription(description: string): Promise<Product[] | null> {
-    console.log(description);
-    return null;
+    const product = await this.ormProductRepository.find({
+      where: { description: Like(`%${description}%`) },
+      relations: ['infos']
+    });
+    return product;
   }
 }

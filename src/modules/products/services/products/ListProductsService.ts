@@ -1,7 +1,7 @@
 import { FindManyOptions, Like } from 'typeorm';
-import { IFilter } from '../domain/models/IFilter';
-import { Product } from '../infra/models/Products';
-import { ProductRepository } from '../infra/repositories/ProductRepository';
+import { IFilterProduct } from '../../domain/models/IFilterProduct';
+import { Product } from '../../infra/models/Products';
+import { ProductRepository } from '../../infra/repositories/ProductRepository';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
@@ -11,7 +11,7 @@ class ListProductService {
     private productRepository: ProductRepository
   ) {}
 
-  async execute(filter: IFilter): Promise<Product[] | null> {
+  async execute(filter: IFilterProduct): Promise<Product[] | null> {
     const options: FindManyOptions = {
       where: {
         name: filter.name ? Like(`%${filter?.name}%`) : null,

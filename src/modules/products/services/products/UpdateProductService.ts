@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
-import { status_code } from '../../../shared/consts/statusCode';
-import { AppError } from '../../../shared/errors/AppError';
-import ValidationError from '../../../shared/errors/BadRequest';
-import { Product } from '../infra/models/Products';
-import { ProductRepository } from '../infra/repositories/ProductRepository';
+import { status_code } from '../../../../shared/consts/statusCode';
+import { AppError } from '../../../../shared/errors/AppError';
+import ValidationError from '../../../../shared/errors/BadRequest';
+import { Product } from '../../infra/models/Products';
+import { ProductRepository } from '../../infra/repositories/ProductRepository';
 
 @injectable()
 class UpdateProductService {

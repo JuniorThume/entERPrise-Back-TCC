@@ -1,4 +1,4 @@
-export interface IFilter {
+export interface IFilterProduct {
   id?: number;
   name?: string;
   description?: string;

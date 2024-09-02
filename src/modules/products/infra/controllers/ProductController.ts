@@ -1,17 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
-import CreateProductService from '../../services/CreateProductService';
-import RemoveProductService from '../../services/RemoveProductService';
-import ShowProductService from '../../services/ShowProductService';
-import ListProductService from '../../services/ListProductsService';
+import CreateProductService from '../../services/products/CreateProductService';
+import RemoveProductService from '../../services/products/RemoveProductService';
+import ShowProductService from '../../services/products/ShowProductService';
+import ListProductService from '../../services/products/ListProductsService';
 import { status_code } from '../../../../shared/consts/statusCode';
-import UpdateProductService from '../../services/UpdateProductService';
+import UpdateProductService from '../../services/products/UpdateProductService';
 import { container } from 'tsyringe';
 
 class ProductController {
   public async insert(
     request: Request,
     response: Response,
-    next: NextFunction //eslint-disable-line 
+    next: NextFunction //eslint-disable-line
   ): Promise<Response> {
     const { product, product_info } = request.body;
     const createProductService = container.resolve(CreateProductService);

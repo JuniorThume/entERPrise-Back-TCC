@@ -3,11 +3,15 @@ import { data_source } from '../../../../shared/typeorm/dataSource';
 import { IProductInfos } from '../../domain/models/IProductInfos';
 import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
 import { ProductInfo } from '../models/ProductInfos';
+import { Product } from '../models/Products';
+import { IFilterInfo } from '../../domain/models/IFilterInfo';
 
 class ProductInfoRepository implements IProductInfoRepository {
   private ormProductInfoRepository: Repository<ProductInfo>;
+  private ormProductRepository: Repository<Product>;
   constructor() {
     this.ormProductInfoRepository = data_source.getRepository(ProductInfo);
+    this.ormProductRepository = data_source.getRepository(Product);
   }
 
   async insert(product_info: IProductInfos): Promise<ProductInfo | null> {
@@ -31,8 +35,7 @@ class ProductInfoRepository implements IProductInfoRepository {
 
   async findById(id: number): Promise<ProductInfo | null> {
     const info = await this.ormProductInfoRepository.findOne({
-      where: { id: id },
-      relations: ['product_id']
+      where: { id: id }
     });
 
     return info;
@@ -44,17 +47,32 @@ class ProductInfoRepository implements IProductInfoRepository {
     return infos;
   }
 
-  async checkSize(size: string): Promise<boolean> {
-    const hasSize = await this.ormProductInfoRepository.findOne({
-      where: { size: size }
+  async findByProduct(
+    product: Product,
+    filter: IFilterInfo
+  ): Promise<ProductInfo[] | null> {
+    const options = Object.assign({}, filter, { product_id: product });
+    const infos = await this.ormProductInfoRepository.find({
+      where: options
     });
 
-    return hasSize ? true : false;
+    return infos;
   }
 
   async findByFilter(options: FindManyOptions): Promise<ProductInfo[] | null> {
     const infos = await this.ormProductInfoRepository.find(options);
     return infos;
+  }
+
+  async infoBelongToProduct(product: Product, id: number): Promise<boolean> {
+    const info = await this.ormProductInfoRepository.findOne({
+      where: {
+        id: id,
+        product_id: product
+      }
+    });
+
+    return info ? true : false;
   }
 }
 
