@@ -30,7 +30,10 @@ class ProductInfoRepository implements IProductInfoRepository {
   }
 
   async findById(id: number): Promise<ProductInfo | null> {
-    const info = await this.ormProductInfoRepository.findOneBy({ id: id });
+    const info = await this.ormProductInfoRepository.findOne({
+      where: { id: id },
+      relations: ['product_id']
+    });
 
     return info;
   }
