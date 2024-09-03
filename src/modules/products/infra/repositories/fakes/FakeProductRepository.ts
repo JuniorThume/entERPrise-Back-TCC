@@ -27,7 +27,6 @@ class FakeProductRepository implements IProductRepository {
     const index = this.ormProductRepository.findIndex(
       (product) => product.id === id
     );
-
     this.ormProductRepository.splice(index, 1);
 
     return { raw: 0, affected: 1 };
@@ -37,7 +36,7 @@ class FakeProductRepository implements IProductRepository {
     const index = this.ormProductRepository.findIndex(
       (product) => product.id === id
     );
-    return this.ormProductRepository[index];
+    return this.ormProductRepository[index] || null;
   }
 
   public async findByName(name: string): Promise<Product[] | null> {

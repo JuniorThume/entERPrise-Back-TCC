@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateProductInfoService } from '../../services/infos/CreateProductInfoService';
 import { status_code } from '../../../../shared/consts/statusCode';
-import { DeleteProductInfoService } from '../../services/infos/DeleteProductInfoService';
+import { DeleteProductInfoService } from '../../services/infos/RemoveProductInfoService';
 import { ShowProductInfoService } from '../../services/infos/ShowProductInfoService';
 import { ListProductInfoService } from '../../services/infos/ListProductInfoService';
 

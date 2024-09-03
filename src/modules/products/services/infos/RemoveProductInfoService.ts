@@ -5,7 +5,7 @@ import NotFound from '../../../../shared/errors/NotFound';
 import { ProductRepository } from '../../infra/repositories/ProductRepository';
 
 @injectable()
-class DeleteProductInfoService {
+class RemoveProductInfoService {
   constructor(
     @inject('ProductInfoRepository')
     private productInfoRepository: ProductInfoRepository,
@@ -38,4 +38,4 @@ class DeleteProductInfoService {
   }
 }
 
-export { DeleteProductInfoService };
+export { RemoveProductInfoService };
