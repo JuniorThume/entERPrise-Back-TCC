@@ -9,7 +9,7 @@ import { IProductInfos } from '../../domain/models/IProductInfos';
 import { Product } from './Products';
 
 @Entity('product_infos')
-export class ProductInfo implements IProductInfos {
+class ProductInfo implements IProductInfos {
   @PrimaryGeneratedColumn('increment')
   id!: number;
 
@@ -29,3 +29,5 @@ export class ProductInfo implements IProductInfos {
   @JoinColumn({ name: 'product_id' })
   product_id!: Product;
 }
+
+export { ProductInfo };

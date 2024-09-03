@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
+import { CreateProducts1718830788772 } from './migrations/1718830788772-CreateProducts';
 import { Product } from '../../modules/products/infra/models/Products';
 import { ProductInfo } from '../../modules/products/infra/models/ProductInfos';
-import { CreateProducts1718830788772 } from './migrations/1718830788772-CreateProducts';
 
 export const data_source = new DataSource({
   type: 'postgres',
@@ -11,5 +11,7 @@ export const data_source = new DataSource({
   password: 'admin',
   database: 'postgres',
   entities: [Product, ProductInfo],
+  synchronize: false,
+  migrationsRun: true,
   migrations: [CreateProducts1718830788772]
 });

@@ -1,17 +1,16 @@
-import 'reflect-metadata';
 import 'express-async-errors';
 import './container/index';
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes/index';
 import { errors } from 'celebrate';
 import HandleErrors from './errors/HandleErrors';
 
-const app = express();
+const app: Application = express();
 app.use(cors());
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
 app.use((request: Request, response: Response, next: NextFunction) => { //eslint-disable-line

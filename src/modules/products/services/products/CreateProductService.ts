@@ -1,14 +1,15 @@
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import ValidationError from '../../../../shared/errors/BadRequest';
 import { ProductInfo } from '../../infra/models/ProductInfos';
 import { Product } from '../../infra/models/Products';
-import { ProductRepository } from '../../infra/repositories/ProductRepository';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
+import BadRequest from '../../../../shared/errors/BadRequest';
 
 @injectable()
 class CreateProductService {
   constructor(
     @inject('ProductRepository')
-    private productRepository: ProductRepository
+    private productRepository: IProductRepository
   ) {}
 
   async execute(
@@ -17,7 +18,7 @@ class CreateProductService {
   ): Promise<Product | null> {
     const productExists = await this.productRepository.findByName(product.name);
     if (productExists?.length) {
-      throw new ValidationError('Já existe um produto com este nome', product);
+      throw new BadRequest('Já existe um produto com este nome', product);
     }
 
     const newProduct = this.productRepository.insert(product, productInfo);
@@ -26,4 +27,4 @@ class CreateProductService {
   }
 }
 
-export default CreateProductService;
+export { CreateProductService };

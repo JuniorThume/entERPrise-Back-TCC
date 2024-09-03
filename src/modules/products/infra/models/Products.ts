@@ -3,7 +3,7 @@ import { ProductInfo } from './ProductInfos';
 import { IProduct } from '../../domain/models/IProduct';
 
 @Entity('products')
-export class Product implements IProduct {
+class Product implements IProduct {
   @PrimaryGeneratedColumn('increment')
   id!: number;
 
@@ -31,3 +31,5 @@ export class Product implements IProduct {
   @OneToMany(() => ProductInfo, (infos) => infos.product_id)
   infos!: ProductInfo[];
 }
+
+export { Product };

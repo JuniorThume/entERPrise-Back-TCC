@@ -5,8 +5,8 @@ import { IProductRepository } from '../../domain/repositories/IProductRepository
 import { ProductInfo } from '../models/ProductInfos';
 
 export class ProductRepository implements IProductRepository {
-  private ormProductRepository: Repository<Product>;
-  private ormInfosRepository: Repository<ProductInfo>;
+  public ormProductRepository: Repository<Product>;
+  public ormInfosRepository: Repository<ProductInfo>;
   constructor() {
     this.ormProductRepository = data_source.getRepository(Product);
     this.ormInfosRepository = data_source.getRepository(ProductInfo);

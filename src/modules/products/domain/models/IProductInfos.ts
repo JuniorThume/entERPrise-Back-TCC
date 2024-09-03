@@ -1,7 +1,7 @@
 import { Product } from '../../infra/models/Products';
 
 export interface IProductInfos {
-  id: number;
+  id?: number;
   quantity: number;
   size: string;
   color: string;

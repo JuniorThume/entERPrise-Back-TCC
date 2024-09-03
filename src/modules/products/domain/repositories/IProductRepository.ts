@@ -4,7 +4,7 @@ import { Product } from '../../infra/models/Products';
 
 export interface IProductRepository {
   insert(product: Product, product_info: ProductInfo): Promise<Product | null>;
-  update(criteria: number, product: Product): Promise<Product | null>;
+  update(id: number, product: Product): Promise<Product | null>;
   delete(id: number): Promise<DeleteResult>;
   findByFilter(options: FindManyOptions): Promise<Product[] | null>;
   findById(id: number): Promise<Product | null>;
