@@ -40,11 +40,13 @@ class FakeProductRepository implements IProductRepository {
     return this.ormProductRepository[index] || null;
   }
 
-  public async findByName(name: string): Promise<Product[] | null> {
-    const products = this.ormProductRepository.filter((product) =>
-      product.name.includes(name)
-    );
-    return products;
+  public async findByName(name: string): Promise<Product | null> {
+    const pro = this.ormProductRepository.findIndex((prod) => {
+      if (prod.name === name) {
+        return prod;
+      }
+    });
+    return this.ormProductRepository[pro];
   }
 
   public async findByDescription(

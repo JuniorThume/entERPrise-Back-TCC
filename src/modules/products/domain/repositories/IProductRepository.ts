@@ -9,6 +9,6 @@ export interface IProductRepository {
   delete(id: number): Promise<DeleteResult>;
   findByFilter(options: IFilterProduct): Promise<Product[] | null>;
   findById(id: number): Promise<Product | null>;
-  findByName(name: string): Promise<Product[] | null>;
+  findByName(name: string): Promise<Product | null>;
   findByDescription(description: string): Promise<Product[] | null>;
 }

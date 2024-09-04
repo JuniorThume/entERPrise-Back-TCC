@@ -4,7 +4,7 @@ import { ProductInfo } from '../../../modules/products/infra/models/ProductInfos
 import { Product } from '../../../modules/products/infra/models/Products';
 import { FakeProductRepository } from '../../../modules/products/infra/repositories/fakes/FakeProductRepository';
 import { CreateProductService } from '../../../modules/products/services/products/CreateProductService';
-import BadRequest from '../../../shared/errors/BadRequest';
+import { BadRequest } from '../../../shared/errors/BadRequest';
 
 describe('CreateProductService', () => {
   let createProductService: CreateProductService;

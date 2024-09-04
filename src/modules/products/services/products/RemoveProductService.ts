@@ -3,7 +3,7 @@ import { DeleteResult } from 'typeorm';
 import { AppError } from '../../../../shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import NotFound from '../../../../shared/errors/NotFound';
+import { NotFound } from '../../../../shared/errors/NotFound';
 
 @injectable()
 class RemoveProductService {

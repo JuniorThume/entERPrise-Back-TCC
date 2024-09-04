@@ -80,9 +80,9 @@ export class ProductRepository implements IProductRepository {
     return product;
   }
 
-  async findByName(name: string): Promise<Product[] | null> {
-    const product = await this.ormProductRepository.find({
-      where: { name: Like(`%${name}%`) },
+  async findByName(name: string): Promise<Product | null> {
+    const product = await this.ormProductRepository.findOne({
+      where: { name: name },
       relations: ['infos']
     });
 

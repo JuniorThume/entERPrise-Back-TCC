@@ -2,7 +2,7 @@ import { ProductInfo } from '../../../modules/products/infra/models/ProductInfos
 import { Product } from '../../../modules/products/infra/models/Products';
 import { FakeProductRepository } from '../../../modules/products/infra/repositories/fakes/FakeProductRepository';
 import { RemoveProductService } from '../../../modules/products/services/products/RemoveProductService';
-import NotFound from '../../../shared/errors/NotFound';
+import { NotFound } from '../../../shared/errors/NotFound';
 
 describe('DeleteProductService', () => {
   const fakeProductRepository = new FakeProductRepository();

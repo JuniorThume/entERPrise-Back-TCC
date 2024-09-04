@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import { AppError } from './AppError';
 import { isCelebrateError } from 'celebrate';
 import { status_code } from '../consts/statusCode';
-import NotFound from './NotFound';
-import BadRequest from './BadRequest';
+import { NotFound } from './NotFound';
+import { BadRequest } from './BadRequest';
 
 function HandleErrors(
   err: AppError | BadRequest | NotFound | Error,

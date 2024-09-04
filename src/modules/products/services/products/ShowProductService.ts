@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { Product } from '../../infra/models/Products';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import NotFound from '../../../../shared/errors/NotFound';
+import { NotFound } from '../../../../shared/errors/NotFound';
 @injectable()
 class ShowProductService {
   constructor(
@@ -23,4 +23,4 @@ class ShowProductService {
   }
 }
 
-export default ShowProductService;
+export { ShowProductService };

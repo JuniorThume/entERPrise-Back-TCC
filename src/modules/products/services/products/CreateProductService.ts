@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { ProductInfo } from '../../infra/models/ProductInfos';
 import { Product } from '../../infra/models/Products';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import BadRequest from '../../../../shared/errors/BadRequest';
+import { BadRequest } from '../../../../shared/errors/BadRequest';
 
 @injectable()
 class CreateProductService {
@@ -17,7 +17,7 @@ class CreateProductService {
     productInfo: ProductInfo
   ): Promise<Product | null> {
     const productExists = await this.productRepository.findByName(product.name);
-    if (productExists?.length) {
+    if (productExists) {
       throw new BadRequest('Já existe um produto com este nome', product);
     }
 
