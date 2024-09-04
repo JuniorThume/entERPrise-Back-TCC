@@ -3,6 +3,7 @@ import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { ProductInfo } from '../models/ProductInfos';
+import { IFilterProduct } from '../../domain/models/IFilterProduct';
 
 export class ProductRepository implements IProductRepository {
   public ormProductRepository: Repository<Product>;
@@ -51,7 +52,19 @@ export class ProductRepository implements IProductRepository {
     return productRemoved;
   }
 
-  async findByFilter(options: FindManyOptions): Promise<Product[] | null> {
+  async findByFilter(filter: IFilterProduct): Promise<Product[] | null> {
+    const options: FindManyOptions = {
+      where: {
+        name: filter.name ? Like(`%${filter?.name}%`) : null,
+        description: filter.description
+          ? Like(`%${filter?.description}%`)
+          : null,
+        material: filter.material ? Like(`%${filter?.material}%`) : null,
+        brand: filter.brand ? Like(`%${filter?.brand}%`) : null,
+        category: filter.category ? Like(`%${filter?.category}%`) : null
+      }
+    };
+
     Object.assign(options, { relations: ['infos'] });
     const product = await this.ormProductRepository.find(options);
 

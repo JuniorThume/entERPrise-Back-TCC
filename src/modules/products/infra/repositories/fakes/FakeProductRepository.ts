@@ -1,7 +1,8 @@
-import { DeleteResult, FindManyOptions } from 'typeorm';
+import { DeleteResult } from 'typeorm';
 import { IProductRepository } from '../../../domain/repositories/IProductRepository';
 import { ProductInfo } from '../../models/ProductInfos';
 import { Product } from '../../models/Products';
+import { IFilterProduct } from '../../../domain/models/IFilterProduct';
 
 class FakeProductRepository implements IProductRepository {
   private ormProductRepository: Product[] = [];
@@ -55,12 +56,50 @@ class FakeProductRepository implements IProductRepository {
     return products;
   }
 
-  public async findByFilter(options: FindManyOptions): Promise<Product[] | null> { //eslint-disable-line
-    const products = this.ormProductRepository.filter((product) => {
-      return product.name.includes('Blu') && product.brand.includes('B');
-    });
+  public async findByFilter(
+    options: IFilterProduct
+  ): Promise<Product[] | null> {
+    let productsFiltered = this.ormProductRepository;
+    if (Object.keys(options).length === 0) {
+      return this.ormProductRepository;
+    }
+    if (options.name !== undefined) {
+      productsFiltered = productsFiltered.filter((product) =>
+        product.name.includes(options?.name as string)
+      );
+    }
 
-    return products;
+    if (options.description !== undefined) {
+      productsFiltered = productsFiltered.filter((product) =>
+        product.description.includes(options?.description as string)
+      );
+    }
+
+    if (options.brand !== undefined) {
+      productsFiltered = productsFiltered.filter((product) =>
+        product.brand.includes(options?.brand as string)
+      );
+    }
+
+    if (options.gender !== undefined) {
+      productsFiltered = productsFiltered.filter((product) =>
+        product.gender.includes(options?.gender as string)
+      );
+    }
+
+    if (options.material !== undefined) {
+      productsFiltered = productsFiltered.filter((product) =>
+        product.material.includes(options?.material as string)
+      );
+    }
+
+    if (options.category !== undefined) {
+      productsFiltered = productsFiltered.filter((product) =>
+        product.category.includes(options?.category as string)
+      );
+    }
+
+    return productsFiltered;
   }
 }
 

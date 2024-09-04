@@ -1,5 +1,4 @@
 export interface IFilterProduct {
-  id?: number;
   name?: string;
   description?: string;
   category?: string;

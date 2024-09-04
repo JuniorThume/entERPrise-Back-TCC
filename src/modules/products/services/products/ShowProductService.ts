@@ -1,18 +1,19 @@
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import ValidationError from '../../../../shared/errors/BadRequest';
 import { Product } from '../../infra/models/Products';
-import { ProductRepository } from '../../infra/repositories/ProductRepository';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
+import NotFound from '../../../../shared/errors/NotFound';
 @injectable()
 class ShowProductService {
   constructor(
     @inject('ProductRepository')
-    private productRepository: ProductRepository
+    private productRepository: IProductRepository
   ) {}
 
   async execute(id: number): Promise<Product | null> {
     const product = await this.productRepository.findById(id);
     if (!product) {
-      throw new ValidationError('Produto nao encontrado', {
+      throw new NotFound('Produto nao encontrado', {
         status: 'Nao foi possivel encontrar o produto preterido',
         id: id
       });
