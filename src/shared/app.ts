@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import 'express-async-errors';
 import './container/index';
 import express, { Application, NextFunction, Request, Response } from 'express';
@@ -20,4 +21,4 @@ app.use((request: Request, response: Response, next: NextFunction) => { //eslint
 app.use(errors());
 app.use(HandleErrors);
 
-export default app;
+export { app };

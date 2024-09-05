@@ -1,11 +1,12 @@
+import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { ProductInfo } from '../../infra/models/ProductInfos';
 import { ProductRepository } from '../../infra/repositories/ProductRepository';
 import { ProductInfoRepository } from '../../infra/repositories/ProductInfoRepository';
-import NotFound from '../../../../shared/errors/NotFound';
+import { NotFound } from '../../../../shared/errors/NotFound';
 import { AppError } from '../../../../shared/errors/AppError';
 import { status_code } from '../../../../shared/consts/statusCode';
-import BadRequest from '../../../../shared/errors/BadRequest';
+import { BadRequest } from '../../../../shared/errors/BadRequest';
 
 @injectable()
 class CreateProductInfoService {

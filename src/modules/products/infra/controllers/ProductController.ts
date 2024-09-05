@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateProductService } from '../../services/products/CreateProductService';
 import { RemoveProductService } from '../../services/products/RemoveProductService';
-import ShowProductService from '../../services/products/ShowProductService';
+import { ShowProductService } from '../../services/products/ShowProductService';
 import { ListProductService } from '../../services/products/ListProductsService';
 import { status_code } from '../../../../shared/consts/statusCode';
-import UpdateProductService from '../../services/products/UpdateProductService';
+import { UpdateProductService } from '../../services/products/UpdateProductService';
 import { container } from 'tsyringe';
 
 class ProductController {

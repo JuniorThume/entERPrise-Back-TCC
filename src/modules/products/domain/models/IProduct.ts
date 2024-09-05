@@ -1,3 +1,5 @@
+import { ProductInfo } from '../../infra/models/ProductInfos';
+
 export interface IProduct {
   id?: number;
   image_url?: string;
@@ -7,4 +9,5 @@ export interface IProduct {
   material: string;
   genre: string;
   brand: string;
+  infos?: ProductInfo[];
 }

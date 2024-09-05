@@ -1,6 +1,6 @@
-import { Product } from '../../../modules/products/infra/models/Products';
-import { FakeProductRepository } from '../../../modules/products/infra/repositories/fakes/FakeProductRepository';
-import UpdateProductService from '../../../modules/products/services/products/UpdateProductService';
+import { Product } from '../../../../modules/products/infra/models/Products';
+import { FakeProductRepository } from '../../../../modules/products/infra/repositories/fakes/FakeProductRepository';
+import { UpdateProductService } from '../../../../modules/products/services/products/UpdateProductService';
 
 describe('UpdateProductService', () => {
   const fakeProductRepository = new FakeProductRepository();
@@ -11,7 +11,7 @@ describe('UpdateProductService', () => {
     brand: 'Marca 1',
     category: 'Categoria',
     description: 'Descricao 1',
-    gender: 'Feminino',
+    genre: 'Feminino',
     image_url: 'https://avatars.githubusercontent.com/u/87200582?v=4',
     material: 'Material 1',
     name: 'Test Product 1',
@@ -35,7 +35,7 @@ describe('UpdateProductService', () => {
       description: 'Teste 2',
       category: 'Teste 2',
       brand: 'Marca 2',
-      gender: 'Masculino',
+      genre: 'Masculino',
       material: 'Material 2',
       image_url: 'https://avatars.githubusercontent.com/u/87200582?v=4',
       infos: []

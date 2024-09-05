@@ -1,7 +1,7 @@
-import { ProductInfo } from '../../../modules/products/infra/models/ProductInfos';
-import { Product } from '../../../modules/products/infra/models/Products';
-import { FakeProductRepository } from '../../../modules/products/infra/repositories/fakes/FakeProductRepository';
-import { ListProductService } from '../../../modules/products/services/products/ListProductsService';
+import { ProductInfo } from '../../../../modules/products/infra/models/ProductInfos';
+import { Product } from '../../../../modules/products/infra/models/Products';
+import { FakeProductRepository } from '../../../../modules/products/infra/repositories/fakes/FakeProductRepository';
+import { ListProductService } from '../../../../modules/products/services/products/ListProductsService';
 
 describe('ListProductService', () => {
   const fakeProductRepository = new FakeProductRepository();
@@ -21,7 +21,7 @@ describe('ListProductService', () => {
       description: 'Test Description',
       category: 'Test Category',
       material: 'Test Material',
-      gender: 'Test Gender',
+      genre: 'Test Gender',
       brand: 'Test Brand',
       image_url: 'Test Image URL',
       infos: []
@@ -33,7 +33,7 @@ describe('ListProductService', () => {
       description: 'Test Description',
       category: 'Test Category',
       material: 'Test Material',
-      gender: 'Test Gender',
+      genre: 'Test Gender',
       brand: 'Test Brand',
       image_url: 'Test Image URL',
       infos: []

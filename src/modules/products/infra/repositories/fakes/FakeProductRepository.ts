@@ -85,7 +85,7 @@ class FakeProductRepository implements IProductRepository {
 
     if (options.gender !== undefined) {
       productsFiltered = productsFiltered.filter((product) =>
-        product.gender.includes(options?.gender as string)
+        product.genre.includes(options?.gender as string)
       );
     }
 

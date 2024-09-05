@@ -9,7 +9,7 @@ export const create_product_validator = celebrate(
         category: Joi.string().required(),
         brand: Joi.string().required(),
         material: Joi.string().required(),
-        gender: Joi.string().required(),
+        genre: Joi.string().required(),
         image_url: Joi.string().optional()
       }).unknown(false),
       product_info: Joi.object({

@@ -34,11 +34,11 @@ class UpdateProductService {
       }
     }
 
-    if (product.gender) {
-      if (!['Masculino', 'Feminino', 'Unissex'].includes(product.gender)) {
+    if (product.genre) {
+      if (!['Masculino', 'Feminino', 'Unissex'].includes(product.genre)) {
         throw new BadRequest('Genero invalido', {
           status: 'Invalid gender',
-          gender: product.gender
+          genre: product.genre
         });
       }
     }
@@ -63,4 +63,4 @@ class UpdateProductService {
   }
 }
 
-export default UpdateProductService;
+export { UpdateProductService };

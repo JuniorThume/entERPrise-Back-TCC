@@ -1,8 +1,8 @@
-import { ProductInfo } from '../../../modules/products/infra/models/ProductInfos';
-import { Product } from '../../../modules/products/infra/models/Products';
-import { FakeProductRepository } from '../../../modules/products/infra/repositories/fakes/FakeProductRepository';
-import { ShowProductService } from '../../../modules/products/services/products/ShowProductService';
-import { NotFound } from '../../../shared/errors/NotFound';
+import { ProductInfo } from '../../../../modules/products/infra/models/ProductInfos';
+import { Product } from '../../../../modules/products/infra/models/Products';
+import { FakeProductRepository } from '../../../../modules/products/infra/repositories/fakes/FakeProductRepository';
+import { ShowProductService } from '../../../../modules/products/services/products/ShowProductService';
+import { NotFound } from '../../../../shared/errors/NotFound';
 
 describe('ShowProductService', () => {
   const fakeProductRepository = new FakeProductRepository();
@@ -13,7 +13,7 @@ describe('ShowProductService', () => {
     description: 'Test Description',
     category: 'Test Category',
     material: 'Test Material',
-    gender: 'Test Gender',
+    genre: 'Test Gender',
     brand: 'Test Brand',
     image_url: 'Test Image URL',
     infos: []
