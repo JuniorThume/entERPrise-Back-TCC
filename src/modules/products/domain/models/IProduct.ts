@@ -5,6 +5,6 @@ export interface IProduct {
   description: string;
   category: string;
   material: string;
-  gender: string;
+  genre: string;
   brand: string;
 }

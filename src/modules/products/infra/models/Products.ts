@@ -23,7 +23,7 @@ class Product implements IProduct {
   material!: string;
 
   @Column('varchar')
-  gender!: string;
+  genre!: string;
 
   @Column('varchar')
   brand!: string;
