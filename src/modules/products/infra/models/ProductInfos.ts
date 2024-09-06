@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { IProductInfos } from '../../domain/models/IProductInfos';
 import { Product } from './Products';
+import { Exclude } from 'class-transformer';
 
 @Entity('product_infos')
 class ProductInfo implements IProductInfos {
@@ -23,8 +24,9 @@ class ProductInfo implements IProductInfos {
   color!: string;
 
   @Column('decimal')
-  prize!: number;
+  price!: number;
 
+  @Exclude({ toClassOnly: true })
   @ManyToOne(() => Product, (product) => product.id)
   @JoinColumn({ name: 'product_id' })
   product_id!: Product;

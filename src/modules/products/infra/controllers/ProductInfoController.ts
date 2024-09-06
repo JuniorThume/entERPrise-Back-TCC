@@ -6,6 +6,8 @@ import { RemoveProductInfoService } from '../../services/infos/RemoveProductInfo
 import { ShowProductInfoService } from '../../services/infos/ShowProductInfoService';
 import { ListProductInfoService } from '../../services/infos/ListProductInfoService';
 import { UpdateProductInfoService } from '../../services/infos/UpdateProductInfoService';
+import { plainToInstance } from 'class-transformer';
+import { ProductInfo } from '../models/ProductInfos';
 
 class ProductInfoController {
   public async insert(request: Request, response: Response): Promise<Response> {
@@ -20,13 +22,9 @@ class ProductInfoController {
       infos
     );
 
-    return response.status(status_code.CREATED).json({
-      id: infoCreated.id,
-      quantity: infoCreated.quantity,
-      size: infoCreated.size,
-      color: infoCreated.color,
-      prize: infoCreated.prize
-    });
+    return response
+      .status(status_code.CREATED)
+      .json(plainToInstance(ProductInfo, infoCreated));
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
@@ -34,7 +32,9 @@ class ProductInfoController {
     const { product_id } = request.params;
     const infos = await infoRepository.execute(Number(product_id));
 
-    return response.status(status_code.OK).json(infos);
+    return response
+      .status(status_code.OK)
+      .json(plainToInstance(ProductInfo, infos));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -46,7 +46,9 @@ class ProductInfoController {
       Number(id)
     );
 
-    return response.status(status_code.OK).json(info);
+    return response
+      .status(status_code.OK)
+      .json(plainToInstance(ProductInfo, info));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -64,7 +66,9 @@ class ProductInfoController {
       changes
     );
 
-    return response.status(status_code.CREATED).json(infoUpdated);
+    return response
+      .status(status_code.CREATED)
+      .json(plainToInstance(ProductInfo, infoUpdated));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

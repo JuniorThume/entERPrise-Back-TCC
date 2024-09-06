@@ -6,12 +6,15 @@ import { ListProductService } from '../../services/products/ListProductsService'
 import { status_code } from '../../../../shared/consts/statusCode';
 import { UpdateProductService } from '../../services/products/UpdateProductService';
 import { container } from 'tsyringe';
+import { instanceToInstance } from 'class-transformer';
 
 class ProductController {
   public async insert(request: Request, response: Response): Promise<Response> {
     const createProductService = container.resolve(CreateProductService);
     const productCreated = await createProductService.execute(request.body);
-    return response.status(status_code.CREATED).json(productCreated);
+    return response
+      .status(status_code.CREATED)
+      .json(instanceToInstance(productCreated));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
@@ -28,7 +31,7 @@ class ProductController {
     const id: number = Number(request.params.id);
     const product = await showProductService.execute(id);
 
-    return response.status(status_code.OK).json(product);
+    return response.status(status_code.OK).json(instanceToInstance(product));
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
@@ -36,7 +39,7 @@ class ProductController {
     const listProductService = container.resolve(ListProductService);
     const products = await listProductService.execute(filter);
 
-    return response.status(status_code.OK).json(products);
+    return response.status(status_code.OK).json(instanceToInstance(products));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -45,7 +48,9 @@ class ProductController {
     const updateProductService = container.resolve(UpdateProductService);
     const productUpdated = await updateProductService.execute(id, rest);
 
-    return response.status(status_code.OK).json(productUpdated);
+    return response
+      .status(status_code.OK)
+      .json(instanceToInstance(productUpdated));
   }
 }
 

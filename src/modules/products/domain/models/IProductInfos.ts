@@ -5,6 +5,6 @@ export interface IProductInfos {
   quantity: number;
   size: string;
   color: string;
-  prize: number;
+  price: number;
   product_id: Product;
 }

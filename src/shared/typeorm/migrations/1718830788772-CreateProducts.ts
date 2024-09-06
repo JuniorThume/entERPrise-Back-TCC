@@ -76,7 +76,7 @@ export class CreateProducts1718830788772 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'prize',
+            name: 'price',
             type: 'decimal'
           },
           {
