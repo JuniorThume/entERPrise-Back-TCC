@@ -19,10 +19,7 @@ class ShowProductInfoService {
     const productExists = await this.productRepository.findById(product_id);
 
     if (!productExists) {
-      throw new NotFound('Nao foi possivel encontrar um produto com esse id', {
-        resource: 'product',
-        status: 'Not Found'
-      });
+      throw new NotFound('Nao foi possivel encontrar um produto com esse id');
     }
     const infoExists = await this.productInfoRepository.infoBelongToProduct(
       productExists,

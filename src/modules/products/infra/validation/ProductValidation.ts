@@ -2,8 +2,8 @@ import { celebrate, Joi, Segments } from 'celebrate';
 
 export const create_product_validator = celebrate(
   {
-    [Segments.BODY]: Joi.object().keys({
-      product: Joi.object({
+    [Segments.BODY]: Joi.object()
+      .keys({
         name: Joi.string().max(100).required(),
         description: Joi.string().max(255).required(),
         category: Joi.string().required(),
@@ -11,14 +11,8 @@ export const create_product_validator = celebrate(
         material: Joi.string().required(),
         genre: Joi.string().required(),
         image_url: Joi.string().optional()
-      }).unknown(false),
-      product_info: Joi.object({
-        size: Joi.string().required(),
-        color: Joi.string().required(),
-        prize: Joi.number().greater(0).required(),
-        quantity: Joi.number().required()
-      }).unknown(false)
-    }),
+      })
+      .unknown(false),
     [Segments.QUERY]: Joi.object({}).unknown(false),
     [Segments.PARAMS]: Joi.object({}).unknown(false)
   },

@@ -1,4 +1,3 @@
-import { ProductInfo } from '../../../../modules/products/infra/models/ProductInfos';
 import { Product } from '../../../../modules/products/infra/models/Products';
 import { FakeProductRepository } from '../../../../modules/products/infra/repositories/fakes/FakeProductRepository';
 import { ListProductService } from '../../../../modules/products/services/products/ListProductsService';
@@ -39,27 +38,9 @@ describe('ListProductService', () => {
       infos: []
     };
 
-    const info1: ProductInfo = {
-      id: 1,
-      quantity: 10,
-      size: 'M',
-      color: 'Test Color',
-      prize: 100,
-      product_id: product1
-    };
-
-    const info2: ProductInfo = {
-      id: 1,
-      quantity: 10,
-      size: 'M',
-      color: 'Test Color',
-      prize: 100,
-      product_id: product1
-    };
-
     it('Deve listar um produto cadastrado', async () => {
-      await fakeProductRepository.insert(product1, info1);
-      await fakeProductRepository.insert(product2, info2);
+      await fakeProductRepository.insert(product1);
+      await fakeProductRepository.insert(product2);
       const products = await listProductService.execute({});
 
       expect(products).toBeInstanceOf(Array);

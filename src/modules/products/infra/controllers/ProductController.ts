@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { CreateProductService } from '../../services/products/CreateProductService';
 import { RemoveProductService } from '../../services/products/RemoveProductService';
 import { ShowProductService } from '../../services/products/ShowProductService';
@@ -6,21 +6,15 @@ import { ListProductService } from '../../services/products/ListProductsService'
 import { status_code } from '../../../../shared/consts/statusCode';
 import { UpdateProductService } from '../../services/products/UpdateProductService';
 import { container } from 'tsyringe';
+import { ProductResponseDTO } from '../../domain/dtos/ProductResponseDTO';
 
 class ProductController {
-  public async insert(
-    request: Request,
-    response: Response,
-    next: NextFunction //eslint-disable-line
-  ): Promise<Response> {
-    const { product, product_info } = request.body;
+  public async insert(request: Request, response: Response): Promise<Response> {
     const createProductService = container.resolve(CreateProductService);
-    const productCreated = await createProductService.execute(
-      product,
-      product_info
-    );
-
-    return response.status(status_code.CREATED).json(productCreated);
+    const productCreated = await createProductService.execute(request.body);
+    return response
+      .status(status_code.CREATED)
+      .json(new ProductResponseDTO(productCreated));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

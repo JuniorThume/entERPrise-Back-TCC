@@ -1,19 +1,15 @@
 import { DeleteResult } from 'typeorm';
-import { IProductRepository } from '../../../domain/repositories/IProductRepository';
+import { IProductRepository } from '../../../domain/interfaces/repositories/IProductRepository';
 import { ProductInfo } from '../../models/ProductInfos';
 import { Product } from '../../models/Products';
-import { IFilterProduct } from '../../../domain/models/IFilterProduct';
+import { IFilterProduct } from '../../../domain/interfaces/models/IFilterProduct';
 
 class FakeProductRepository implements IProductRepository {
   private ormProductRepository: Product[] = [];
   private ormInfosRepository: ProductInfo[] = [];
 
-  public async insert(
-    product: Product,
-    product_info: ProductInfo
-  ): Promise<Product | null> {
+  public async insert(product: Product): Promise<Product | null> {
     this.ormProductRepository.push(product);
-    this.ormInfosRepository.push(product_info);
 
     return product;
   }

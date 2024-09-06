@@ -1,4 +1,3 @@
-import { ProductInfo } from '../../../../modules/products/infra/models/ProductInfos';
 import { Product } from '../../../../modules/products/infra/models/Products';
 import { FakeProductRepository } from '../../../../modules/products/infra/repositories/fakes/FakeProductRepository';
 import { ShowProductService } from '../../../../modules/products/services/products/ShowProductService';
@@ -18,17 +17,9 @@ describe('ShowProductService', () => {
     image_url: 'Test Image URL',
     infos: []
   };
-  const info1: ProductInfo = {
-    id: 1,
-    quantity: 10,
-    size: 'M',
-    color: 'Test Color',
-    prize: 100,
-    product_id: product1
-  };
 
   it('Deve trazer um produto especifico por id', async () => {
-    fakeProductRepository.insert(product1, info1);
+    fakeProductRepository.insert(product1);
     const product = await showProductService.execute(1);
 
     expect(product?.id).toBe(1);

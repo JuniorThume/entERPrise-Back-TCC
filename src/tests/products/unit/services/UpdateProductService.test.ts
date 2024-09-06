@@ -18,16 +18,8 @@ describe('UpdateProductService', () => {
     infos: []
   };
 
-  const info_test = {
-    id: 1,
-    prize: 100,
-    color: 'Cor 1',
-    quantity: 12,
-    size: 'Tamanho 1',
-    product_id: product_test
-  };
   it('Deve atualizar um produto', async () => {
-    await fakeProductRepository.insert(product_test, info_test);
+    await fakeProductRepository.insert(product_test);
 
     const updates: Product = {
       id: product_test.id,

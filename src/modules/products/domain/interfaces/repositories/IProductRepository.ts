@@ -1,10 +1,9 @@
 import { DeleteResult } from 'typeorm';
-import { ProductInfo } from '../../infra/models/ProductInfos';
-import { Product } from '../../infra/models/Products';
+import { Product } from '../../../infra/models/Products';
 import { IFilterProduct } from '../models/IFilterProduct';
 
 export interface IProductRepository {
-  insert(product: Product, product_info: ProductInfo): Promise<Product | null>;
+  insert(product: Product): Promise<Product | null>;
   update(id: number, product: Product): Promise<Product | null>;
   delete(id: number): Promise<DeleteResult>;
   findByFilter(options: IFilterProduct): Promise<Product[] | null>;

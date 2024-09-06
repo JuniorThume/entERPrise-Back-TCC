@@ -8,7 +8,7 @@ import { ListProductInfoService } from '../../services/infos/ListProductInfoServ
 
 class ProductInfoController {
   public async insert(request: Request, response: Response): Promise<Response> {
-    const product_id = Number(request.params.id);
+    const product_id = Number(request.params.product_id);
     const infos = request.body;
 
     const createProductInfoService = container.resolve(
@@ -19,7 +19,13 @@ class ProductInfoController {
       infos
     );
 
-    return response.status(status_code.CREATED).json(infoCreated);
+    return response.status(status_code.CREATED).json({
+      id: infoCreated.id,
+      quantity: infoCreated.quantity,
+      size: infoCreated.size,
+      color: infoCreated.color,
+      prize: infoCreated.prize
+    });
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
@@ -51,7 +57,7 @@ class ProductInfoController {
 
     await deleteProductInfoService.execute(Number(product_id), Number(id));
 
-    return response.status(status_code.OK).json({});
+    return response.status(status_code.NO_CONTENT).json();
   }
 }
 

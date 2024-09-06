@@ -25,7 +25,8 @@ export class CreateProducts1718830788772 implements MigrationInterface {
           {
             name: 'description',
             type: 'varchar',
-            length: '255'
+            length: '255',
+            isNullable: true
           },
           {
             name: 'category',

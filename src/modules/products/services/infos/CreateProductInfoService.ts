@@ -1,45 +1,40 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { ProductInfo } from '../../infra/models/ProductInfos';
-import { ProductRepository } from '../../infra/repositories/ProductRepository';
-import { ProductInfoRepository } from '../../infra/repositories/ProductInfoRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
 import { AppError } from '../../../../shared/errors/AppError';
 import { status_code } from '../../../../shared/consts/statusCode';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
+import { IProductRepository } from '../../domain/interfaces/repositories/IProductRepository';
+import { IProductInfoRepository } from '../../domain/interfaces/repositories/IProductInfoRepository';
+import { IProductInfos } from '../../domain/interfaces/models/IProductInfos';
 
 @injectable()
 class CreateProductInfoService {
   constructor(
     @inject('ProductRepository')
-    private productRepository: ProductRepository,
+    private productRepository: IProductRepository,
     @inject('ProductInfoRepository')
-    private productInfoRepository: ProductInfoRepository
+    private productInfoRepository: IProductInfoRepository
   ) {}
   async execute(
     product_id: number,
     product_info: ProductInfo
-  ): Promise<ProductInfo> {
+  ): Promise<IProductInfos> {
     const product = await this.productRepository.findById(product_id);
     if (!product) {
-      throw new NotFound('Nao foi possivel encontrar um produto com esse id', {
-        resource: 'product',
-        status: 'Not Found'
-      });
+      throw new NotFound('Nao foi possivel encontrar um produto com esse id');
     }
     const alreadyExists = await this.productInfoRepository.findByFilter({
       where: {
-        product_id: product_id,
+        product_id: product,
         size: product_info.size,
         color: product_info.color
-      }
+      },
+      relations: undefined
     });
-
-    if (alreadyExists?.length) {
-      throw new BadRequest(
-        'Produto ja possui essas informações cadastradas',
-        {}
-      );
+    if (alreadyExists.length !== 0) {
+      throw new BadRequest('Produto ja possui essas informações cadastradas');
     }
 
     product_info.product_id = product;

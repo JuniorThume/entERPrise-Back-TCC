@@ -1,4 +1,3 @@
-import { ProductInfo } from '../../../../modules/products/infra/models/ProductInfos';
 import { Product } from '../../../../modules/products/infra/models/Products';
 import { FakeProductRepository } from '../../../../modules/products/infra/repositories/fakes/FakeProductRepository';
 import { RemoveProductService } from '../../../../modules/products/services/products/RemoveProductService';
@@ -22,16 +21,7 @@ describe('DeleteProductService', () => {
       infos: []
     };
 
-    const info: ProductInfo = {
-      id: 2,
-      quantity: 10,
-      size: 'M',
-      color: 'Teste',
-      prize: 100,
-      product_id: product as Product
-    };
-
-    const prod_created = await fakeProductRepository.insert(product, info);
+    const prod_created = await fakeProductRepository.insert(product);
 
     await removeProductService.execute(prod_created?.id as number);
 
