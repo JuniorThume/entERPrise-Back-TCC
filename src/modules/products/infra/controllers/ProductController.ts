@@ -6,15 +6,12 @@ import { ListProductService } from '../../services/products/ListProductsService'
 import { status_code } from '../../../../shared/consts/statusCode';
 import { UpdateProductService } from '../../services/products/UpdateProductService';
 import { container } from 'tsyringe';
-import { ProductResponseDTO } from '../../domain/dtos/ProductResponseDTO';
 
 class ProductController {
   public async insert(request: Request, response: Response): Promise<Response> {
     const createProductService = container.resolve(CreateProductService);
     const productCreated = await createProductService.execute(request.body);
-    return response
-      .status(status_code.CREATED)
-      .json(new ProductResponseDTO(productCreated));
+    return response.status(status_code.CREATED).json(productCreated);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

@@ -1,7 +1,7 @@
 import { DeleteResult, FindManyOptions } from 'typeorm';
-import { ProductInfo } from '../../../infra/models/ProductInfos';
+import { ProductInfo } from '../../infra/models/ProductInfos';
 import { IProductInfos } from '../models/IProductInfos';
-import { Product } from '../../../infra/models/Products';
+import { Product } from '../../infra/models/Products';
 
 export interface IProductInfoRepository {
   insert(product_info: IProductInfos): Promise<ProductInfo | null>;

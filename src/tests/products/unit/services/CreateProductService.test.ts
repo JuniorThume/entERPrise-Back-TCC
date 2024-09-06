@@ -1,4 +1,4 @@
-import { IProduct } from '../../../../modules/products/domain/interfaces/models/IProduct';
+import { IProduct } from '../../../../modules/products/domain/models/IProduct';
 import { Product } from '../../../../modules/products/infra/models/Products';
 import { FakeProductRepository } from '../../../../modules/products/infra/repositories/fakes/FakeProductRepository';
 import { CreateProductService } from '../../../../modules/products/services/products/CreateProductService';

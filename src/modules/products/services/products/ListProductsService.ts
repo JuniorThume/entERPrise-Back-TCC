@@ -1,8 +1,8 @@
 import 'reflect-metadata';
-import { IFilterProduct } from '../../domain/interfaces/models/IFilterProduct';
+import { IFilterProduct } from '../../domain/models/IFilterProduct';
 import { Product } from '../../infra/models/Products';
 import { inject, injectable } from 'tsyringe';
-import { IProductRepository } from '../../domain/interfaces/repositories/IProductRepository';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
 
 @injectable()
 class ListProductService {

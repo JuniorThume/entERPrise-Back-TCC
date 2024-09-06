@@ -1,9 +1,9 @@
 import { DeleteResult, FindManyOptions, Like, Repository } from 'typeorm';
 import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';
-import { IProductRepository } from '../../domain/interfaces/repositories/IProductRepository';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { ProductInfo } from '../models/ProductInfos';
-import { IFilterProduct } from '../../domain/interfaces/models/IFilterProduct';
+import { IFilterProduct } from '../../domain/models/IFilterProduct';
 
 export class ProductRepository implements IProductRepository {
   public ormProductRepository: Repository<Product>;
@@ -65,7 +65,8 @@ export class ProductRepository implements IProductRepository {
 
   async findById(product_id: number): Promise<Product | null> {
     const product = await this.ormProductRepository.findOne({
-      where: { id: product_id }
+      where: { id: product_id },
+      relations: ['infos']
     });
 
     return product;

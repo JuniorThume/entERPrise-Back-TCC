@@ -5,6 +5,7 @@ import { status_code } from '../../../../shared/consts/statusCode';
 import { RemoveProductInfoService } from '../../services/infos/RemoveProductInfoService';
 import { ShowProductInfoService } from '../../services/infos/ShowProductInfoService';
 import { ListProductInfoService } from '../../services/infos/ListProductInfoService';
+import { UpdateProductInfoService } from '../../services/infos/UpdateProductInfoService';
 
 class ProductInfoController {
   public async insert(request: Request, response: Response): Promise<Response> {
@@ -46,6 +47,24 @@ class ProductInfoController {
     );
 
     return response.status(status_code.OK).json(info);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const product_id = parseInt(request.params.product_id);
+    const id = parseInt(request.params.id);
+    const changes = request.body;
+
+    const updateProductInfoService = container.resolve(
+      UpdateProductInfoService
+    );
+
+    const infoUpdated = await updateProductInfoService.execute(
+      product_id,
+      id,
+      changes
+    );
+
+    return response.status(status_code.CREATED).json(infoUpdated);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

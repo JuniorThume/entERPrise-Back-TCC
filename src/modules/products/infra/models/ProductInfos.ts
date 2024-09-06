@@ -5,9 +5,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { IProductInfos } from '../../domain/interfaces/models/IProductInfos';
+import { IProductInfos } from '../../domain/models/IProductInfos';
 import { Product } from './Products';
-import { Exclude } from 'class-transformer';
 
 @Entity('product_infos')
 class ProductInfo implements IProductInfos {
@@ -28,7 +27,6 @@ class ProductInfo implements IProductInfos {
 
   @ManyToOne(() => Product, (product) => product.id)
   @JoinColumn({ name: 'product_id' })
-  @Exclude()
   product_id!: Product;
 }
 

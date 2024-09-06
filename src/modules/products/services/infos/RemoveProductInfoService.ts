@@ -1,16 +1,16 @@
 import { inject, injectable } from 'tsyringe';
-import { ProductInfoRepository } from '../../infra/repositories/ProductInfoRepository';
 import { DeleteResult } from 'typeorm';
 import { NotFound } from '../../../../shared/errors/NotFound';
-import { ProductRepository } from '../../infra/repositories/ProductRepository';
+import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
 
 @injectable()
 class RemoveProductInfoService {
   constructor(
     @inject('ProductInfoRepository')
-    private productInfoRepository: ProductInfoRepository,
+    private productInfoRepository: IProductInfoRepository,
     @inject('ProductRepository')
-    private productRepository: ProductRepository
+    private productRepository: IProductRepository
   ) {}
   public async execute(
     product_id: number,
@@ -27,7 +27,7 @@ class RemoveProductInfoService {
       throw new NotFound('Informação não existe no produto definido');
     }
 
-    if (infoExists?.product_id.id !== productExists.id) {
+    if (infoExists?.product_id !== productExists) {
       throw new NotFound('O produto e a informação não se relacionam');
     }
 

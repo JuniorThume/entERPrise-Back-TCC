@@ -1,4 +1,4 @@
-import { Product } from '../../../infra/models/Products';
+import { Product } from '../../infra/models/Products';
 
 export interface IProductInfos {
   id?: number;

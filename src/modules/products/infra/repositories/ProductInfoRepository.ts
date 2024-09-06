@@ -1,17 +1,15 @@
 import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
 import { data_source } from '../../../../shared/typeorm/dataSource';
-import { IProductInfos } from '../../domain/interfaces/models/IProductInfos';
-import { IProductInfoRepository } from '../../domain/interfaces/repositories/IProductInfoRepository';
+import { IProductInfos } from '../../domain/models/IProductInfos';
+import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
 import { ProductInfo } from '../models/ProductInfos';
+import { IFilterInfo } from '../../domain/models/IFilterInfo';
 import { Product } from '../models/Products';
-import { IFilterInfo } from '../../domain/interfaces/models/IFilterInfo';
 
 class ProductInfoRepository implements IProductInfoRepository {
   private ormProductInfoRepository: Repository<ProductInfo>;
-  private ormProductRepository: Repository<Product>;
   constructor() {
     this.ormProductInfoRepository = data_source.getRepository(ProductInfo);
-    this.ormProductRepository = data_source.getRepository(Product);
   }
 
   async insert(product_info: IProductInfos): Promise<ProductInfo | null> {
@@ -35,8 +33,7 @@ class ProductInfoRepository implements IProductInfoRepository {
 
   async findById(id: number): Promise<ProductInfo | null> {
     const info = await this.ormProductInfoRepository.findOne({
-      where: { id: id },
-      relations: ['product_id']
+      where: { id: id }
     });
 
     return info;
@@ -53,6 +50,7 @@ class ProductInfoRepository implements IProductInfoRepository {
     filter: IFilterInfo
   ): Promise<ProductInfo[] | null> {
     const options = Object.assign({}, filter, { product_id: product });
+
     const infos = await this.ormProductInfoRepository.find({
       where: options
     });

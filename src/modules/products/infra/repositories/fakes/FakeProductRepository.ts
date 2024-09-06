@@ -1,8 +1,8 @@
 import { DeleteResult } from 'typeorm';
-import { IProductRepository } from '../../../domain/interfaces/repositories/IProductRepository';
+import { IProductRepository } from '../../../domain/repositories/IProductRepository';
 import { ProductInfo } from '../../models/ProductInfos';
 import { Product } from '../../models/Products';
-import { IFilterProduct } from '../../../domain/interfaces/models/IFilterProduct';
+import { IFilterProduct } from '../../../domain/models/IFilterProduct';
 
 class FakeProductRepository implements IProductRepository {
   private ormProductRepository: Product[] = [];

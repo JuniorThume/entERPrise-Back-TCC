@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { status_code } from '../../../../shared/consts/statusCode';
 import { AppError } from '../../../../shared/errors/AppError';
 import { Product } from '../../infra/models/Products';
-import { IProductRepository } from '../../domain/interfaces/repositories/IProductRepository';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
 
 @injectable()

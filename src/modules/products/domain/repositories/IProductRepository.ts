@@ -1,5 +1,5 @@
 import { DeleteResult } from 'typeorm';
-import { Product } from '../../../infra/models/Products';
+import { Product } from '../../infra/models/Products';
 import { IFilterProduct } from '../models/IFilterProduct';
 
 export interface IProductRepository {

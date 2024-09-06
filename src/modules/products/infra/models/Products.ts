@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ProductInfo } from './ProductInfos';
-import { IProduct } from '../../domain/interfaces/models/IProduct';
+import { IProduct } from '../../domain/models/IProduct';
 
 @Entity('products')
 class Product implements IProduct {

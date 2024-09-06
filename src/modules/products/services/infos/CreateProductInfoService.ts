@@ -5,9 +5,9 @@ import { NotFound } from '../../../../shared/errors/NotFound';
 import { AppError } from '../../../../shared/errors/AppError';
 import { status_code } from '../../../../shared/consts/statusCode';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
-import { IProductRepository } from '../../domain/interfaces/repositories/IProductRepository';
-import { IProductInfoRepository } from '../../domain/interfaces/repositories/IProductInfoRepository';
-import { IProductInfos } from '../../domain/interfaces/models/IProductInfos';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
+import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
+import { IProductInfos } from '../../domain/models/IProductInfos';
 
 @injectable()
 class CreateProductInfoService {

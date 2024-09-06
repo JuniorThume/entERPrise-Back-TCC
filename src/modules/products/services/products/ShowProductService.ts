@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { Product } from '../../infra/models/Products';
-import { IProductRepository } from '../../domain/interfaces/repositories/IProductRepository';
+import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
 @injectable()
 class ShowProductService {

@@ -10,6 +10,8 @@ router.post(
   create_info_product_validation,
   productinfoController.insert
 );
+
+router.put('/:product_id/infos/:id', productinfoController.update);
 router.get('/:product_id/infos/:id', productinfoController.show);
 
 router.get('/:product_id/infos', productinfoController.list);
