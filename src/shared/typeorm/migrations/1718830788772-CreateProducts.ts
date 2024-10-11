@@ -45,8 +45,8 @@ export class CreateProducts1718830788772 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'image_url',
-            type: 'varchar',
+            name: 'image',
+            type: 'bytea',
             isNullable: true
           }
         ]

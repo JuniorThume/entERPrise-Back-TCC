@@ -2,7 +2,7 @@ import { ProductInfo } from '../../infra/models/ProductInfos';
 
 export interface IProduct {
   id?: number;
-  image_url?: string;
+  image?: string | Buffer;
   name: string;
   description: string;
   category: string;

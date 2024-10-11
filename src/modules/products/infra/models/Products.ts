@@ -10,8 +10,8 @@ class Product implements IProduct {
   @Column('varchar')
   name!: string;
 
-  @Column('varchar')
-  image_url!: string;
+  @Column('bytea')
+  image!: string | Buffer;
 
   @Column('varchar')
   description!: string;

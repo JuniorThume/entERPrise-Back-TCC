@@ -18,14 +18,28 @@ class CreateProductService {
     if (productExists) {
       throw new BadRequest('Já existe um produto com este nome');
     }
-
-    const newProduct = await this.productRepository.insert(product);
+    if (product.image) {
+      const base64Image = product.image.toString();
+      product = {
+        ...product,
+        image: Buffer.from(base64Image, 'base64')
+      };
+    }
+    let newProduct = await this.productRepository.insert(product);
 
     if (!newProduct) {
       throw new AppError(
         'Erro ao inserir o produto',
         status_code.INTERNAL_SERVER_ERROR
       );
+    }
+
+    if (newProduct.image) {
+      const imageBuffer = newProduct.image;
+      newProduct = {
+        ...newProduct,
+        image: imageBuffer.toString('base64')
+      };
     }
 
     return newProduct;

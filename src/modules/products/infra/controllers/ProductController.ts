@@ -12,9 +12,12 @@ class ProductController {
   public async insert(request: Request, response: Response): Promise<Response> {
     const createProductService = container.resolve(CreateProductService);
     const productCreated = await createProductService.execute(request.body);
+    // console.log(productCreated.image);
     return response
       .status(status_code.CREATED)
-      .json(instanceToInstance(productCreated));
+      .setHeader('Content-Type', 'application/json')
+      .json(instanceToInstance(productCreated))
+      .end();
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
@@ -39,7 +42,10 @@ class ProductController {
     const listProductService = container.resolve(ListProductService);
     const products = await listProductService.execute(filter);
 
-    return response.status(status_code.OK).json(instanceToInstance(products));
+    return response
+      .status(status_code.OK)
+      .header({ 'Content-Type': 'application/json' })
+      .json(instanceToInstance(products));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

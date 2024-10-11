@@ -34,13 +34,6 @@ class UpdateProductService {
       }
     }
 
-    if (product.image_url) {
-      const imageExists = fetch(product.image_url)
-        .then((image) => image)
-        .catch(() => new BadRequest('A imagem não é válida'));
-      if (!imageExists) throw new BadRequest('Imagem not found');
-    }
-
     const productUpdated = await this.productRepository.update(id, product);
 
     return productUpdated as null;
