@@ -13,6 +13,9 @@ class ListProductService {
 
   async execute(filter: IFilterProduct): Promise<Product[] | null> {
     const products = await this.productRepository.findByFilter(filter);
+    products?.forEach((product) => {
+      product.image = product.image?.toString('base64');
+    });
     return products;
   }
 }

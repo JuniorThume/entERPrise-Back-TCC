@@ -1,5 +1,8 @@
 export enum errors {
-  AppError = 'AppError',
-  BadRequest = 'Bad Request',
-  NotFound = 'NotFound'
+  AppError = 'App Error',
+  BadRequest = 'Bad Request Error',
+  NotFound = 'Not Found Error',
+  Unauthorized = 'Unauthorized Error',
+  Conflict = 'Conflict Error',
+  InternalServerError = 'Internal Server Error'
 }

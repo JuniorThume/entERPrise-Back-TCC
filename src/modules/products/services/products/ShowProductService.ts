@@ -16,6 +16,8 @@ class ShowProductService {
       throw new NotFound('Produto nao encontrado');
     }
 
+    product.image = product.image?.toString('base64');
+
     return product;
   }
 }

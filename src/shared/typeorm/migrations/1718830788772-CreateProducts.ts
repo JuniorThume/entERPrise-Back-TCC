@@ -48,6 +48,17 @@ export class CreateProducts1718830788772 implements MigrationInterface {
             name: 'image',
             type: 'bytea',
             isNullable: true
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP'
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
+            onUpdate: 'CURRENT_TIMESTAMP'
           }
         ]
       })
@@ -82,6 +93,17 @@ export class CreateProducts1718830788772 implements MigrationInterface {
           {
             name: 'product_id',
             type: 'int'
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP'
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
+            onUpdate: 'CURRENT_TIMESTAMP'
           }
         ]
       })

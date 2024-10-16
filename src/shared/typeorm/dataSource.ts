@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import { CreateProducts1718830788772 } from './migrations/1718830788772-CreateProducts';
 import { Product } from '../../modules/products/infra/models/Products';
 import { ProductInfo } from '../../modules/products/infra/models/ProductInfos';
+import { CreateCredentials1729084533180 } from './migrations/1729084533180-CreateCredentials';
 
 export const data_source = new DataSource({
   type: 'postgres',
@@ -13,5 +14,5 @@ export const data_source = new DataSource({
   entities: [Product, ProductInfo],
   synchronize: false,
   migrationsRun: true,
-  migrations: [CreateProducts1718830788772]
+  migrations: [CreateProducts1718830788772, CreateCredentials1729084533180]
 });

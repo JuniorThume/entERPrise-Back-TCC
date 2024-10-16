@@ -4,9 +4,17 @@ import { isCelebrateError } from 'celebrate';
 import { status_code } from '../consts/statusCode';
 import { NotFound } from './NotFound';
 import { BadRequest } from './BadRequest';
+import { UnauthorizedError } from './UnauthorizedError';
+import { ConflictError } from './ConflictError';
 
 function HandleErrors(
-  err: AppError | BadRequest | NotFound | Error,
+  err:
+    | AppError
+    | BadRequest
+    | NotFound
+    | ConflictError
+    | UnauthorizedError
+    | Error,
   request: Request,
   response: Response,
   next: NextFunction // eslint-disable-line
@@ -14,13 +22,14 @@ function HandleErrors(
   if (err instanceof AppError) {
     return response.status(err._code).json(err);
   } else if (err instanceof BadRequest) {
-    return response.status(err.code).json(err.returnAsJSON());
+    return response.status(err._code).json(err.returnAsJSON());
   } else if (err instanceof NotFound) {
-    return response.status(err.code).json(err.returnAsJSON());
+    return response.status(err._code).json(err.returnAsJSON());
+  } else if (err instanceof UnauthorizedError) {
+    return response.status(err._code).json(err.returnAsJSON());
   } else if (isCelebrateError(err)) {
     return response.status(400).json(err);
   } else {
-    console.log(err.stack);
     return response.status(status_code.INTERNAL_SERVER_ERROR).json({
       error: 'Internal Server Error',
       message: 'Houve algum erro que o servidor não soube lidar',
