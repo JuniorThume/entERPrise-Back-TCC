@@ -8,8 +8,8 @@ class AuthController {
   public async login(request: Request, response: Response): Promise<Response> {
     const { username, password } = request.body;
 
-    const authService = container.resolve(LoginService);
-    const token = authService.execute({ username, password });
+    const loginService = container.resolve(LoginService);
+    const token = await loginService.execute({ username, password });
     return response.status(status_code.OK).json(token);
   }
 

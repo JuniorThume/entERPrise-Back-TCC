@@ -9,7 +9,6 @@ export const authMiddleware = (
 ) => {
   const token = request.headers.authorization?.split(' ')[1];
 
-  console.log(token);
   if (!token) {
     throw new UnauthorizedError('Forneça um token válido e tente novamente.');
   }

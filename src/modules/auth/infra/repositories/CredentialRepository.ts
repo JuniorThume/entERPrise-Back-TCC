@@ -2,6 +2,7 @@ import { Repository } from 'typeorm';
 import { data_source } from '../../../../shared/typeorm/dataSource';
 import { ICredentialRepository } from '../../domain/repositories/ICredentialRepository';
 import { Credential } from '../models/Credentials';
+import { ICredential } from '../../domain/models/ICredential';
 
 class CredentialRepository implements ICredentialRepository {
   public ormCredentialRepository: Repository<Credential>;
@@ -34,9 +35,11 @@ class CredentialRepository implements ICredentialRepository {
   }
 
   public async findCredential(
-    credential: Credential
+    credential: ICredential
   ): Promise<Credential | null> {
-    return await this.ormCredentialRepository.findOne({ where: credential });
+    return await this.ormCredentialRepository.findOne({
+      where: credential
+    });
   }
 
   public async updatePassword(
