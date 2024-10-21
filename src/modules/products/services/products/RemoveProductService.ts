@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import { DeleteResult } from 'typeorm';
-import { AppError } from '../../../../shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
+import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 
 @injectable()
 class RemoveProductService {
@@ -19,11 +19,11 @@ class RemoveProductService {
     }
     const productRemoved = await this.productRepository.delete(id);
     if (!productRemoved) {
-      throw new AppError('Falha ao remover o produto', 500);
+      throw new InternalServerError('Falha ao remover o produto');
     }
 
     if (productRemoved.affected === 0) {
-      throw new AppError('Produto nao removido', 500);
+      throw new InternalServerError('Produto nao removido');
     }
 
     return productRemoved;

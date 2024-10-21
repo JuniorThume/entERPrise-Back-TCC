@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { CreateProductInfoService } from '../../services/infos/CreateProductInfoService';
+import { CreateProductInfoService } from '../../services/details/CreateProductInfoService';
 import { status_code } from '../../../../shared/consts/statusCode';
-import { RemoveProductInfoService } from '../../services/infos/RemoveProductInfoService';
-import { ShowProductInfoService } from '../../services/infos/ShowProductInfoService';
-import { ListProductInfoService } from '../../services/infos/ListProductInfoService';
-import { UpdateProductInfoService } from '../../services/infos/UpdateProductInfoService';
+import { RemoveProductInfoService } from '../../services/details/RemoveProductInfoService';
+import { ShowProductInfoService } from '../../services/details/ShowProductInfoService';
+import { ListProductInfoService } from '../../services/details/ListProductInfoService';
+import { UpdateProductInfoService } from '../../services/details/UpdateProductInfoService';
 import { plainToInstance } from 'class-transformer';
 import { ProductInfo } from '../models/ProductInfos';
 

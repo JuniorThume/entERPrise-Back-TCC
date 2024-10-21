@@ -1,10 +1,9 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { status_code } from '../../../../shared/consts/statusCode';
-import { AppError } from '../../../../shared/errors/AppError';
 import { Product } from '../../infra/models/Products';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
+import { NotFound } from '../../../../shared/errors/NotFound';
 
 @injectable()
 class UpdateProductService {
@@ -16,9 +15,10 @@ class UpdateProductService {
   async execute(id: number, product: Product): Promise<Product | null> {
     const productExists = await this.productRepository.findById(id);
     if (!productExists) {
-      throw new AppError('Product not found', status_code.NOT_FOUND);
+      throw new NotFound('Produto nao encontrado');
     }
-    if (product.name) {
+
+    if (product.name !== productExists.name) {
       const productNameAlreadyExists = await this.productRepository.findByName(
         product.name
       );
@@ -28,8 +28,20 @@ class UpdateProductService {
       }
     }
 
+    if (product.image) {
+      const base64Image = product.image.toString();
+      product = {
+        ...product,
+        image: Buffer.from(base64Image, 'base64')
+      };
+    }
+
     if (product.genre) {
-      if (!['Masculino', 'Feminino', 'Unissex'].includes(product.genre)) {
+      if (
+        !['Masculino', 'Feminino', 'Unissex', 'Infantil'].includes(
+          product.genre
+        )
+      ) {
         throw new BadRequest('O genero do produto e invalido');
       }
     }

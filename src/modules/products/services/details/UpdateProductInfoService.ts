@@ -2,10 +2,10 @@ import { inject, injectable } from 'tsyringe';
 import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
-import { AppError } from '../../../../shared/errors/AppError';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
 import { ProductInfo } from '../../infra/models/ProductInfos';
 import { IChanges } from '../../domain/models/IChanges';
+import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 
 @injectable()
 class UpdateProductInfoService {
@@ -47,9 +47,8 @@ class UpdateProductInfoService {
     const updatedProduct = await this.productInfoRepository.update(infoExists);
 
     if (!updatedProduct) {
-      throw new AppError(
-        'Não foi possível atualizar a informação do produto',
-        500
+      throw new InternalServerError(
+        'Não foi possível atualizar a informação do produto'
       );
     }
 

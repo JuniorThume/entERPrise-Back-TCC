@@ -9,7 +9,9 @@ export const create_product_validator = celebrate(
         category: Joi.string().required(),
         brand: Joi.string().required(),
         material: Joi.string().required(),
-        genre: Joi.string().required(),
+        genre: Joi.string()
+          .allow('Infantil', 'Masculino', 'Feminino', 'Unissex')
+          .required(),
         image: Joi.any().optional()
       })
       .unknown(false),
@@ -28,7 +30,9 @@ export const update_product_validator = celebrate(
         category: Joi.string().optional(),
         brand: Joi.string().optional(),
         material: Joi.string().optional(),
-        gender: Joi.string().optional(),
+        genre: Joi.string()
+          .allow('Infantil', 'Masculino', 'Feminino', 'Unissex')
+          .optional(),
         image: Joi.any().optional().allow('')
       })
       .unknown(false),
@@ -46,7 +50,9 @@ export const list_product_validator = celebrate({
     category: Joi.string().optional(),
     brand: Joi.string().optional(),
     material: Joi.string().optional(),
-    gender: Joi.string().optional()
+    genre: Joi.string().optional(),
+    page: Joi.number().optional(),
+    limit: Joi.number().optional()
   }).unknown(false),
   [Segments.BODY]: Joi.object({}).unknown(false),
   [Segments.PARAMS]: Joi.object({}).unknown(false)

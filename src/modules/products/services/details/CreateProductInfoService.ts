@@ -2,12 +2,11 @@ import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { ProductInfo } from '../../infra/models/ProductInfos';
 import { NotFound } from '../../../../shared/errors/NotFound';
-import { AppError } from '../../../../shared/errors/AppError';
-import { status_code } from '../../../../shared/consts/statusCode';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
 import { IProductInfos } from '../../domain/models/IProductInfos';
+import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 
 @injectable()
 class CreateProductInfoService {
@@ -42,9 +41,8 @@ class CreateProductInfoService {
     const infoCreated = await this.productInfoRepository.insert(product_info);
 
     if (!infoCreated) {
-      throw new AppError(
-        'Não foi possível cadastrar novas informações sobre o produto',
-        status_code.INTERNAL_SERVER_ERROR
+      throw new InternalServerError(
+        'Não foi possível cadastrar novas informações sobre o produto'
       );
     }
 

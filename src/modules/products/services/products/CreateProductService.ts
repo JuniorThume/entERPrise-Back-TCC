@@ -3,8 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { Product } from '../../infra/models/Products';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
-import { AppError } from '../../../../shared/errors/AppError';
-import { status_code } from '../../../../shared/consts/statusCode';
+import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 
 @injectable()
 class CreateProductService {
@@ -26,12 +25,8 @@ class CreateProductService {
       };
     }
     let newProduct = await this.productRepository.insert(product);
-
     if (!newProduct) {
-      throw new AppError(
-        'Erro ao inserir o produto',
-        status_code.INTERNAL_SERVER_ERROR
-      );
+      throw new InternalServerError('Erro ao inserir o produto');
     }
 
     if (newProduct.image) {
