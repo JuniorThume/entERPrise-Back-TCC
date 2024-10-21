@@ -9,7 +9,7 @@ export class AppError extends Error {
 
   public returnAsJSON() {
     return {
-      error: this.name,
+      error: this._name,
       code: this._code,
       message: this.message
     };

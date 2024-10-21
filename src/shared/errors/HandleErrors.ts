@@ -20,12 +20,6 @@ function HandleErrors(
   next: NextFunction // eslint-disable-line
 ) {
   if (err instanceof AppError) {
-    return response.status(err._code).json(err);
-  } else if (err instanceof BadRequest) {
-    return response.status(err._code).json(err.returnAsJSON());
-  } else if (err instanceof NotFound) {
-    return response.status(err._code).json(err.returnAsJSON());
-  } else if (err instanceof UnauthorizedError) {
     return response.status(err._code).json(err.returnAsJSON());
   } else if (isCelebrateError(err)) {
     return response.status(400).json(err);

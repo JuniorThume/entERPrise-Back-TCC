@@ -6,10 +6,10 @@ import cors from 'cors';
 import routes from './routes/index';
 import { errors } from 'celebrate';
 import HandleErrors from './errors/HandleErrors';
+// import { middleware } from 'express-paginate';
 
 const app: Application = express();
 app.use(cors());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
