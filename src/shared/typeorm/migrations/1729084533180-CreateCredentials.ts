@@ -23,6 +23,17 @@ export class CreateCredentials1729084533180 implements MigrationInterface {
             name: 'password',
             type: 'text',
             isNullable: false
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp with time zone',
+            default: 'CURRENT_TIMESTAMP'
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp with time zone',
+            default: 'CURRENT_TIMESTAMP',
+            onUpdate: 'CURRENT_TIMESTAMP'
           }
         ]
       })

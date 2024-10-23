@@ -8,13 +8,7 @@ import { UnauthorizedError } from './UnauthorizedError';
 import { ConflictError } from './ConflictError';
 
 function HandleErrors(
-  err:
-    | AppError
-    | BadRequest
-    | NotFound
-    | ConflictError
-    | UnauthorizedError
-    | Error,
+  err: AppError | BadRequest | NotFound | ConflictError | UnauthorizedError,
   request: Request,
   response: Response,
   next: NextFunction // eslint-disable-line

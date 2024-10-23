@@ -1,10 +1,7 @@
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
 import { UnauthorizedError } from '../../../shared/errors/UnauthorizedError';
 import { inject, injectable } from 'tsyringe';
 import { CredentialRepository } from '../infra/repositories/CredentialRepository';
-
-dotenv.config();
+import { generateAccessTokens } from '../../../shared/utils/generateAccessTokens';
 
 interface ILoginData {
   username: string;
@@ -17,7 +14,6 @@ class LoginService {
     @inject('CredentialRepository')
     private credentialRepository: CredentialRepository
   ) {}
-  private SECRET_KEY = process.env?.SECRET_KEY || 'secret_discreta';
 
   public async execute({ username, password }: ILoginData): Promise<string> {
     const credentialExist = await this.credentialRepository.findCredential({
@@ -28,14 +24,8 @@ class LoginService {
     if (!credentialExist) {
       throw new UnauthorizedError('Credenciais invalidas');
     }
-    const token = jwt.sign(
-      { user: { id: credentialExist.id, username: credentialExist.username } },
-      this.SECRET_KEY,
-      {
-        expiresIn: '1h'
-      }
-    );
 
+    const token = generateAccessTokens(credentialExist);
     return token;
   }
 }

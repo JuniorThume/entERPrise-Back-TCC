@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { UnauthorizedError } from '../../../../shared/errors/UnauthorizedError';
-import jwt from 'jsonwebtoken';
-const SECRET_KEY = process.env.SECRET_KEY || 'secret_discreta';
+import jwt, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
+import { SECRET_KEY } from '../../../../shared/consts/secret';
 export const authMiddleware = (
   request: Request,
   response: Response,
@@ -13,10 +13,14 @@ export const authMiddleware = (
     throw new UnauthorizedError('Forneça um token válido e tente novamente.');
   }
 
-  const decode = jwt.verify(token, SECRET_KEY);
-  if (!decode) {
-    throw new UnauthorizedError('Token invalido');
+  try {
+    jwt.verify(token, SECRET_KEY);
+    next();
+  } catch (err) {
+    if (err instanceof TokenExpiredError) {
+      throw new UnauthorizedError('Token Expirado');
+    } else if (err instanceof JsonWebTokenError) {
+      throw new UnauthorizedError('Token inválido');
+    }
   }
-
-  next();
 };

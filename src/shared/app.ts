@@ -6,11 +6,18 @@ import cors from 'cors';
 import routes from './routes/index';
 import { errors } from 'celebrate';
 import HandleErrors from './errors/HandleErrors';
-// import { middleware } from 'express-paginate';
+import cookieParser from 'cookie-parser';
 
 const app: Application = express();
-app.use(cors());
+
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
