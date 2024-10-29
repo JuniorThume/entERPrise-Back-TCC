@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import bcrypt from 'bcrypt';
 
 export class CreateCredentials1729084533180 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -39,8 +40,9 @@ export class CreateCredentials1729084533180 implements MigrationInterface {
       })
     );
 
+    const hash_password = await bcrypt.hash('@adm1nP4ssW0rd', 10);
     await queryRunner.query(
-      `INSERT INTO credentials ("username", "password") VALUES ( 'admin' , '@adm1nP4ssW0rd')`
+      `INSERT INTO credentials ("username", "password") VALUES ( 'admin' , '${hash_password}')`
     );
   }
 
