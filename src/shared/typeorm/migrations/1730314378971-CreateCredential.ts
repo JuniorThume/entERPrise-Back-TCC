@@ -1,17 +1,21 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey
+} from 'typeorm';
 import bcrypt from 'bcrypt';
 
-export class CreateCredentials1729084533180 implements MigrationInterface {
+export class CreateCredential1730314378971 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: 'credentials',
         columns: [
           {
-            name: 'id',
+            name: 'employee_id',
             type: 'integer',
-            isPrimary: true,
-            isGenerated: true
+            isPrimary: true
           },
           {
             name: 'username',
@@ -40,9 +44,22 @@ export class CreateCredentials1729084533180 implements MigrationInterface {
       })
     );
 
+    await queryRunner.createForeignKey(
+      'credentials',
+      new TableForeignKey({
+        referencedTableName: 'employees',
+        referencedColumnNames: ['id'],
+        columnNames: ['employee_id']
+      })
+    );
+
+    await queryRunner.query(
+      `INSERT INTO employees ("personal_data_id", "role" ) values ('1', 'admin')`
+    );
+
     const hash_password = await bcrypt.hash('@adm1nP4ssW0rd', 10);
     await queryRunner.query(
-      `INSERT INTO credentials ("username", "password") VALUES ( 'admin' , '${hash_password}')`
+      `INSERT INTO credentials ("username", "password", "employee_id") VALUES ( 'admin' , '${hash_password}', '1')`
     );
   }
 

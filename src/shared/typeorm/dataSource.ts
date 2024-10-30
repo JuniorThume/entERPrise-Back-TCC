@@ -3,7 +3,9 @@ import { CreateProducts1718830788772 } from './migrations/1718830788772-CreatePr
 import { Product } from '../../modules/products/infra/models/Products';
 import { ProductInfo } from '../../modules/products/infra/models/ProductInfos';
 import { Credential } from '../../modules/auth/infra/models/Credentials';
-import { CreateCredentials1729084533180 } from './migrations/1729084533180-CreateCredentials';
+import { CreatePersonalData1730300041393 } from './migrations/1730300041393-CreatePersonalData';
+import { CreateEmployees1730314035940 } from './migrations/1730314035940-CreateEmployees';
+import { CreateCredential1730314378971 } from './migrations/1730314378971-CreateCredential';
 
 export const data_source = new DataSource({
   type: 'postgres',
@@ -14,6 +16,10 @@ export const data_source = new DataSource({
   database: 'postgres',
   entities: [Product, ProductInfo, Credential],
   synchronize: false,
-  migrationsRun: true,
-  migrations: [CreateProducts1718830788772, CreateCredentials1729084533180]
+  migrations: [
+    CreateProducts1718830788772,
+    CreatePersonalData1730300041393,
+    CreateEmployees1730314035940,
+    CreateCredential1730314378971
+  ]
 });

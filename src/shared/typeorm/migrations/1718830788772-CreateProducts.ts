@@ -51,12 +51,12 @@ export class CreateProducts1718830788772 implements MigrationInterface {
           },
           {
             name: 'created_at',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'CURRENT_TIMESTAMP'
           },
           {
             name: 'updated_at',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'CURRENT_TIMESTAMP',
             onUpdate: 'CURRENT_TIMESTAMP'
           }
@@ -92,16 +92,17 @@ export class CreateProducts1718830788772 implements MigrationInterface {
           },
           {
             name: 'product_id',
-            type: 'int'
+            type: 'int',
+            isNullable: false
           },
           {
             name: 'created_at',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'CURRENT_TIMESTAMP'
           },
           {
             name: 'updated_at',
-            type: 'timestamp',
+            type: 'timestamp with time zone',
             default: 'CURRENT_TIMESTAMP',
             onUpdate: 'CURRENT_TIMESTAMP'
           }
