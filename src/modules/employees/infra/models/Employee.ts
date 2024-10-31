@@ -1,23 +1,34 @@
-import { Column, JoinColumn, OneToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 import { IEmployee } from '../../domain/models/IEmployee';
 import { PersonalData } from '../../../personal_data/infra/models/PersonalData';
+import { Exclude } from 'class-transformer';
 
+@Entity('employees')
 class Employee implements IEmployee {
-  @Column()
+  @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('varchar')
   role: string;
 
-  @Column()
+  @Exclude()
+  @Column('timestamp with time zone')
   created_at: Date;
 
-  @Column()
+  @Exclude()
+  @Column('timestamp with time zone')
   updated_at: Date;
 
-  @OneToOne(() => PersonalData, (personal_data_id) => personal_data_id.id)
-  @JoinColumn()
-  personal_data_id: number;
+  // @Exclude({ toClassOnly: true })
+  @OneToOne(() => PersonalData, (personal_data) => personal_data.id)
+  @JoinColumn({ name: 'personal_data_id' })
+  personal_data_id: PersonalData;
 }
 
 export { Employee };
