@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { app } from './app';
 import 'dotenv/config';
 import { data_source } from './typeorm/dataSource';

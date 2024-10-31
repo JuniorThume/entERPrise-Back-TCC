@@ -1,11 +1,13 @@
+import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { CreateProducts1718830788772 } from './migrations/1718830788772-CreateProducts';
 import { Product } from '../../modules/products/infra/models/Products';
 import { ProductInfo } from '../../modules/products/infra/models/ProductInfos';
 import { Credential } from '../../modules/auth/infra/models/Credentials';
+import { CreateProducts1718830788772 } from './migrations/1718830788772-CreateProducts';
 import { CreatePersonalData1730300041393 } from './migrations/1730300041393-CreatePersonalData';
 import { CreateEmployees1730314035940 } from './migrations/1730314035940-CreateEmployees';
 import { CreateCredential1730314378971 } from './migrations/1730314378971-CreateCredential';
+import { PersonalData } from '../../modules/personal_data/infra/models/PersonalData';
 
 export const data_source = new DataSource({
   type: 'postgres',
@@ -14,7 +16,7 @@ export const data_source = new DataSource({
   username: 'postgres',
   password: 'admin',
   database: 'postgres',
-  entities: [Product, ProductInfo, Credential],
+  entities: [Product, ProductInfo, Credential, PersonalData],
   synchronize: false,
   migrations: [
     CreateProducts1718830788772,

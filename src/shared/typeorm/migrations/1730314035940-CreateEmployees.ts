@@ -20,7 +20,7 @@ export class CreateEmployees1730314035940 implements MigrationInterface {
           {
             name: 'personal_data_id',
             type: 'integer',
-            isNullable: false
+            isNullable: true
           },
           {
             name: 'role',

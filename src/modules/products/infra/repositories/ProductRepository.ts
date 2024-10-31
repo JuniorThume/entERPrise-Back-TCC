@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { DeleteResult, FindManyOptions, Like, Repository } from 'typeorm';
 import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';

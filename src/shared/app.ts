@@ -1,17 +1,14 @@
-import 'reflect-metadata';
-import 'express-async-errors';
 import './container/index';
+import 'express-async-errors';
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes/index';
 import { errors } from 'celebrate';
 import HandleErrors from './errors/HandleErrors';
-import cookieParser from 'cookie-parser';
 
 const app: Application = express();
 
 app.use(express.json());
-app.use(cookieParser());
 app.use(
   cors({
     origin: 'http://localhost:5173',

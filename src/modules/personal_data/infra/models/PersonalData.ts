@@ -1,7 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import 'reflect-metadata';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { IPersonalData } from '../../domain/models/IPersonalData';
 import { Exclude } from 'class-transformer';
 
+@Entity()
 class PersonalData implements IPersonalData {
   @PrimaryGeneratedColumn('increment')
   id: number;
