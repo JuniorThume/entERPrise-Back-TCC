@@ -5,31 +5,37 @@ import { IProduct } from '../../domain/models/IProduct';
 @Entity('products')
 class Product implements IProduct {
   @PrimaryGeneratedColumn('increment')
-  id!: number;
+  id: number;
 
   @Column('varchar')
-  name!: string;
+  name: string;
 
   @Column('bytea')
-  image!: string | Buffer;
+  image: string | Buffer;
 
   @Column('varchar')
-  description!: string;
+  description: string;
 
   @Column('varchar')
-  category!: string;
+  category: string;
 
   @Column('varchar')
-  material!: string;
+  material: string;
 
   @Column('varchar')
-  genre!: string;
+  genre: string;
 
   @Column('varchar')
-  brand!: string;
+  brand: string;
 
   @OneToMany(() => ProductInfo, (infos) => infos.product_id)
-  infos!: ProductInfo[];
+  infos: ProductInfo[];
+
+  @Column('timestamp with time zone')
+  created_at: Date;
+
+  @Column('timestamp with time zone')
+  updated_at: Date;
 }
 
 export { Product };

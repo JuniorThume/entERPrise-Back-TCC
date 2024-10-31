@@ -20,7 +20,8 @@ export class CreateEmployees1730314035940 implements MigrationInterface {
           {
             name: 'personal_data_id',
             type: 'integer',
-            isNullable: true
+            isNullable: true,
+            isUnique: true
           },
           {
             name: 'role',
@@ -50,8 +51,7 @@ export class CreateEmployees1730314035940 implements MigrationInterface {
       new TableForeignKey({
         columnNames: ['personal_data_id'],
         referencedTableName: 'personal_data',
-        referencedColumnNames: ['id'],
-        onDelete: 'CASCADE'
+        referencedColumnNames: ['id']
       })
     );
   }

@@ -3,29 +3,29 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { IPersonalData } from '../../domain/models/IPersonalData';
 import { Exclude } from 'class-transformer';
 
-@Entity()
+@Entity('personal_data')
 class PersonalData implements IPersonalData {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
+  @Column('varchar')
   cpf: string;
 
-  @Column()
+  @Column('varchar')
   name: string;
 
-  @Column()
+  @Column('varchar')
   email: string;
 
-  @Column()
+  @Column('varchar')
   phone: string;
 
   @Exclude()
-  @Column()
+  @Column('timestamp with time zone')
   created_at: Date;
 
   @Exclude()
-  @Column()
+  @Column('timestamp with time zone')
   updated_at: Date;
 }
 export { PersonalData };

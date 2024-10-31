@@ -8,6 +8,7 @@ import { CreatePersonalData1730300041393 } from './migrations/1730300041393-Crea
 import { CreateEmployees1730314035940 } from './migrations/1730314035940-CreateEmployees';
 import { CreateCredential1730314378971 } from './migrations/1730314378971-CreateCredential';
 import { PersonalData } from '../../modules/personal_data/infra/models/PersonalData';
+import { Employee } from '../../modules/employees/infra/models/Employee';
 
 export const data_source = new DataSource({
   type: 'postgres',
@@ -16,12 +17,15 @@ export const data_source = new DataSource({
   username: 'postgres',
   password: 'admin',
   database: 'postgres',
-  entities: [Product, ProductInfo, Credential, PersonalData],
+  entities: [Product, ProductInfo, Credential, PersonalData, Employee],
   synchronize: false,
   migrations: [
     CreateProducts1718830788772,
     CreatePersonalData1730300041393,
     CreateEmployees1730314035940,
     CreateCredential1730314378971
-  ]
+  ],
+  extra: {
+    options: '-c timezone=America/Sao_Paulo'
+  }
 });

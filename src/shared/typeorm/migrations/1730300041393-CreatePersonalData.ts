@@ -40,13 +40,13 @@ export class CreatePersonalData1730300041393 implements MigrationInterface {
           },
           {
             name: 'created_at',
-            type: 'timestamp',
+            type: 'timestamp  with time zone',
             default: 'CURRENT_TIMESTAMP',
             isNullable: false
           },
           {
             name: 'updated_at',
-            type: 'timestamp',
+            type: 'timestamp  with time zone',
             default: 'CURRENT_TIMESTAMP',
             isNullable: false,
             onUpdate: 'CASCADE'

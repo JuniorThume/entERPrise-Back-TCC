@@ -14,10 +14,12 @@ class Credential implements ICredential {
   @Column('text')
   password: string;
 
-  @Column('timestamp')
+  @Exclude()
+  @Column('timestamp with time zone')
   created_at: string;
 
-  @Column('timestamp')
+  @Exclude()
+  @Column('timestamp with time zone')
   updated_at: string;
 }
 
