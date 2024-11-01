@@ -5,12 +5,12 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { IProductInfos } from '../../domain/models/IProductOptions';
 import { Product } from './Products';
 import { Exclude } from 'class-transformer';
+import { IProductOptions } from '../../domain/models/IProductOptions';
 
 @Entity('product_options')
-class ProductInfo implements IProductInfos {
+class ProductOption implements IProductOptions {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
@@ -38,4 +38,4 @@ class ProductInfo implements IProductInfos {
   updated_at: Date;
 }
 
-export { ProductInfo };
+export { ProductOption };

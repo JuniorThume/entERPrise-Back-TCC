@@ -18,11 +18,15 @@ class EmployeeRepository implements IEmployeeRepository {
     personal_data: PersonalData
   ): Promise<Employee | null> {
     const finded_personal_data = await this.ormEmployeeRepository.findOneBy({
-      personal_data_id: {
+      personal_data: {
         id: personal_data.id
       }
     });
     return finded_personal_data;
+  }
+
+  public async findByName(name: string): Promise<Employee | null> {
+    return await this.ormEmployeeRepository.findOneBy({ name });
   }
 
   public async findById(id: number): Promise<Employee | null> {
@@ -35,7 +39,7 @@ class EmployeeRepository implements IEmployeeRepository {
 
   public async findAll(): Promise<Employee[]> {
     return await this.ormEmployeeRepository.find({
-      relations: ['personal_data_id']
+      relations: ['personal_data']
     });
   }
 

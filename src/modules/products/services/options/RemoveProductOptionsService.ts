@@ -1,14 +1,14 @@
 import { inject, injectable } from 'tsyringe';
 import { DeleteResult } from 'typeorm';
 import { NotFound } from '../../../../shared/errors/NotFound';
-import { IProductInfoRepository } from '../../domain/repositories/IProductOptionsRepository';
+import { IProductOptionsRepository } from '../../domain/repositories/IProductOptionsRepository';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 
 @injectable()
-class RemoveProductInfoService {
+class RemoveProductOptionsService {
   constructor(
-    @inject('ProductInfoRepository')
-    private productInfoRepository: IProductInfoRepository,
+    @inject('ProductOptionsRepository')
+    private productOptionsRepository: IProductOptionsRepository,
     @inject('ProductRepository')
     private productRepository: IProductRepository
   ) {}
@@ -21,20 +21,20 @@ class RemoveProductInfoService {
       throw new NotFound('O produto nao existe');
     }
 
-    const infoExists = await this.productInfoRepository.findById(info_id);
+    const infoExists = await this.productOptionsRepository.findById(info_id);
 
     if (!infoExists) {
-      throw new NotFound('Informação não existe no produto definido');
+      throw new NotFound('Optionsrmação não existe no produto definido');
     }
 
     if (infoExists?.product_id !== productExists) {
       throw new NotFound('O produto e a informação não se relacionam');
     }
 
-    const infoDeleted = await this.productInfoRepository.delete(info_id);
+    const infoDeleted = await this.productOptionsRepository.delete(info_id);
 
     return infoDeleted;
   }
 }
 
-export { RemoveProductInfoService };
+export { RemoveProductOptionsService };

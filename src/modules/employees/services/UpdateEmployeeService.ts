@@ -19,6 +19,17 @@ class UpdateEmployeeService {
       throw new ConflictError('Funcionário não encontrado');
     }
 
+    if (altered_employee.name !== employee_exists.name) {
+      const employee_name_exists = await this.employeeRepository.findByName(
+        altered_employee.name
+      );
+
+      if (employee_name_exists) {
+        throw new ConflictError(
+          'Este nome já está cadastrado nos dados de outro funcionário!'
+        );
+      }
+    }
     const updated_employee =
       await this.employeeRepository.update(altered_employee);
 

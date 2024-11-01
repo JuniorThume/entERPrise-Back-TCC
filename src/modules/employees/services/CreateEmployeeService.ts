@@ -15,7 +15,11 @@ class CreateEmployeeService {
     private personalDataRepository: IPersonalDataRepository
   ) {}
 
-  async execute(personal_data_id: number, role: string): Promise<Employee> {
+  async execute(
+    personal_data_id: number,
+    role: string,
+    name: string
+  ): Promise<Employee> {
     const personal_data_exists =
       await this.personalDataRepository.findById(personal_data_id);
 
@@ -31,9 +35,17 @@ class CreateEmployeeService {
         'Já existe um funcionário cadastrado com esses dados pessoais'
       );
     }
+
+    const personal_name_exists = await this.employeeRepository.findByName(name);
+
+    if (personal_name_exists) {
+      throw new ConflictError('Este nome já está cadastrado!');
+    }
+
     const employee: IEmployee = {
+      name,
       role,
-      personal_data_id: personal_data_exists
+      personal_data: personal_data_exists
     };
 
     const createdEmployee = await this.employeeRepository.create(employee);

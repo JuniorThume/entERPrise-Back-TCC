@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { ProductInfo } from './ProductOptions';
+import { ProductOption } from './ProductOptions';
 import { IProduct } from '../../domain/models/IProduct';
 
 @Entity('products')
@@ -28,8 +28,8 @@ class Product implements IProduct {
   @Column('varchar')
   brand: string;
 
-  @OneToMany(() => ProductInfo, (infos) => infos.product_id)
-  infos: ProductInfo[];
+  @OneToMany(() => ProductOption, (options) => options.product_id)
+  infos: ProductOption[];
 
   @Column('timestamp with time zone')
   created_at: Date;

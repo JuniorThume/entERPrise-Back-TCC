@@ -1,6 +1,6 @@
 import { Product } from '../../infra/models/Products';
 
-export interface IProductInfos {
+export interface IProductOptions {
   id?: number;
   quantity: number;
   size: string;

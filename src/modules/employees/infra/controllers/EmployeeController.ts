@@ -12,12 +12,13 @@ import { IEmployee } from '../../domain/models/IEmployee';
 
 class EmployeeController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { role, personal_data_id } = request.body;
+    const { role, name, personal_data_id } = request.body;
     const createEmployeeService = container.resolve(CreateEmployeeService);
 
     const created_employee = await createEmployeeService.execute(
       Number(personal_data_id),
-      role
+      role,
+      name
     );
     if (!created_employee) {
       throw new InternalServerError(
@@ -27,6 +28,7 @@ class EmployeeController {
 
     return response
       .status(status_code.CREATED)
+      .setHeader('Content-Type', 'application/json')
       .json(instanceToInstance(created_employee));
   }
 

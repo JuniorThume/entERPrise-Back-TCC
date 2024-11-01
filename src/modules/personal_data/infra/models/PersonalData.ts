@@ -12,9 +12,6 @@ class PersonalData implements IPersonalData {
   cpf: string;
 
   @Column('varchar')
-  name: string;
-
-  @Column('varchar')
   email: string;
 
   @Column('varchar')

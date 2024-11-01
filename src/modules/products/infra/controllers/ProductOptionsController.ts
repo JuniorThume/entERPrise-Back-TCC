@@ -1,54 +1,56 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { CreateProductInfoService } from '../../services/details/CreateProductInfoService';
+import { CreateProductOptionsService } from '../../services/options/CreateProductOptionsService';
 import { status_code } from '../../../../shared/consts/statusCode';
-import { RemoveProductInfoService } from '../../services/details/RemoveProductInfoService';
-import { ShowProductInfoService } from '../../services/details/ShowProductInfoService';
-import { ListProductInfoService } from '../../services/details/ListProductInfoService';
-import { UpdateProductInfoService } from '../../services/details/UpdateProductInfoService';
+import { RemoveProductOptionsService } from '../../services/options/RemoveProductOptionsService';
+import { ShowProductOptionsService } from '../../services/options/ShowProductOptionsService';
+import { ListProductOptionsService } from '../../services/options/ListProductOptionsService';
+import { UpdateProductOptionsService } from '../../services/options/UpdateProductOptionsService';
 import { plainToInstance } from 'class-transformer';
-import { ProductInfo } from '../models/ProductOptions';
+import { ProductOption } from '../models/ProductOptions';
 
 class ProductOptionsController {
   public async insert(request: Request, response: Response): Promise<Response> {
     const product_id = Number(request.params.product_id);
     const infos = request.body;
 
-    const createProductInfoService = container.resolve(
-      CreateProductInfoService
+    const createProductOptionsService = container.resolve(
+      CreateProductOptionsService
     );
-    const infoCreated = await createProductInfoService.execute(
+    const infoCreated = await createProductOptionsService.execute(
       product_id,
       infos
     );
 
     return response
       .status(status_code.CREATED)
-      .json(plainToInstance(ProductInfo, infoCreated));
+      .json(plainToInstance(ProductOption, infoCreated));
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
-    const infoRepository = container.resolve(ListProductInfoService);
+    const infoRepository = container.resolve(ListProductOptionsService);
     const { product_id } = request.params;
     const infos = await infoRepository.execute(Number(product_id));
 
     return response
       .status(status_code.OK)
-      .json(plainToInstance(ProductInfo, infos));
+      .json(plainToInstance(ProductOption, infos));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
     const { product_id, id } = request.params;
 
-    const showProductInfoService = container.resolve(ShowProductInfoService);
-    const info = await showProductInfoService.execute(
+    const showProductOptionsService = container.resolve(
+      ShowProductOptionsService
+    );
+    const info = await showProductOptionsService.execute(
       Number(product_id),
       Number(id)
     );
 
     return response
       .status(status_code.OK)
-      .json(plainToInstance(ProductInfo, info));
+      .json(plainToInstance(ProductOption, info));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -56,11 +58,11 @@ class ProductOptionsController {
     const id = parseInt(request.params.id);
     const changes = request.body;
 
-    const updateProductInfoService = container.resolve(
-      UpdateProductInfoService
+    const updateProductOptionsService = container.resolve(
+      UpdateProductOptionsService
     );
 
-    const infoUpdated = await updateProductInfoService.execute(
+    const infoUpdated = await updateProductOptionsService.execute(
       product_id,
       id,
       changes
@@ -68,17 +70,17 @@ class ProductOptionsController {
 
     return response
       .status(status_code.CREATED)
-      .json(plainToInstance(ProductInfo, infoUpdated));
+      .json(plainToInstance(ProductOption, infoUpdated));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
     const { product_id, id } = request.params;
 
-    const deleteProductInfoService = container.resolve(
-      RemoveProductInfoService
+    const deleteProductOptionsService = container.resolve(
+      RemoveProductOptionsService
     );
 
-    await deleteProductInfoService.execute(Number(product_id), Number(id));
+    await deleteProductOptionsService.execute(Number(product_id), Number(id));
 
     return response.status(status_code.NO_CONTENT).json();
   }

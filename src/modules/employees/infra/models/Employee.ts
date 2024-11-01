@@ -15,6 +15,9 @@ class Employee implements IEmployee {
   id: number;
 
   @Column('varchar')
+  name: string;
+
+  @Column('varchar')
   role: string;
 
   @Exclude()
@@ -27,8 +30,8 @@ class Employee implements IEmployee {
 
   // @Exclude({ toClassOnly: true })
   @OneToOne(() => PersonalData, (personal_data) => personal_data.id)
-  @JoinColumn({ name: 'personal_data_id' })
-  personal_data_id: PersonalData;
+  @JoinColumn({ name: 'personal_data' })
+  personal_data: PersonalData;
 }
 
 export { Employee };

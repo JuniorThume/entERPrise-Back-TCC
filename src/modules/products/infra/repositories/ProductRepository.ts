@@ -2,16 +2,16 @@ import { DeleteResult, FindManyOptions, Like, Repository } from 'typeorm';
 import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import { ProductInfo } from '../models/ProductOptions';
+import { ProductOption } from '../models/ProductOptions';
 import { IFilterProduct } from '../../domain/models/IFilterProduct';
 import { IPaginate } from '../../domain/models/IPaginate';
 
 export class ProductRepository implements IProductRepository {
   public ormProductRepository: Repository<Product>;
-  public ormInfosRepository: Repository<ProductInfo>;
+  public ormOptionsRepository: Repository<ProductOption>;
   constructor() {
     this.ormProductRepository = data_source.getRepository(Product);
-    this.ormInfosRepository = data_source.getRepository(ProductInfo);
+    this.ormOptionsRepository = data_source.getRepository(ProductOption);
   }
 
   public async insert(product: Product): Promise<Product | null> {

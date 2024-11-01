@@ -1,14 +1,19 @@
 import { DeleteResult, FindManyOptions } from 'typeorm';
-import { ProductInfo } from '../../infra/models/ProductOptions';
-import { IProductInfos } from '../models/IProductOptions';
+import { ProductOption } from '../../infra/models/ProductOptions';
+import { IProductOptions } from '../models/IProductOptions';
 import { Product } from '../../infra/models/Products';
+import { IFilterOption } from '../models/IFilterOption';
 
 export interface IProductOptionsRepository {
-  insert(product_info: IProductInfos): Promise<ProductInfo | null>;
-  update(info: IProductInfos): Promise<ProductInfo | null>;
+  insert(product_info: IProductOptions): Promise<ProductOption | null>;
+  update(info: IProductOptions): Promise<ProductOption | null>;
   delete(id: number): Promise<DeleteResult>;
-  findByFilter(options: FindManyOptions): Promise<ProductInfo[]>;
-  findById(id: number): Promise<ProductInfo | null>;
-  findBySize(size: string): Promise<ProductInfo[] | null>;
+  findByProduct(
+    product: Product,
+    filter: IFilterOption
+  ): Promise<ProductOption[] | null>;
+  findByFilter(options: FindManyOptions): Promise<ProductOption[]>;
+  findById(id: number): Promise<ProductOption | null>;
+  findBySize(size: string): Promise<ProductOption[] | null>;
   infoBelongToProduct(product: Product, id: number): Promise<boolean>;
 }

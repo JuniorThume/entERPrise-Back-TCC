@@ -16,10 +16,6 @@ class PersonalDataRepository implements IPersonalDataRepository {
     return await this.ormPersonalDataRepository.findOneBy({ id });
   }
 
-  public async findByName(name: string): Promise<PersonalData | null> {
-    return await this.ormPersonalDataRepository.findOneBy({ name });
-  }
-
   public async findByEmail(email: string): Promise<PersonalData | null> {
     return await this.ormPersonalDataRepository.findOneBy({ email });
   }

@@ -1,17 +1,17 @@
 import { inject, injectable } from 'tsyringe';
-import { IProductInfoRepository } from '../../domain/repositories/IProductOptionsRepository';
+import { IProductOptionsRepository } from '../../domain/repositories/IProductOptionsRepository';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
-import { ProductInfo } from '../../infra/models/ProductOptions';
+import { ProductOption } from '../../infra/models/ProductOptions';
 import { IChanges } from '../../domain/models/IChanges';
 import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 
 @injectable()
-class UpdateProductInfoService {
+class UpdateProductOptionsService {
   constructor(
-    @inject('ProductInfoRepository')
-    private productInfoRepository: IProductInfoRepository,
+    @inject('ProductOptionsRepository')
+    private productOptionsRepository: IProductOptionsRepository,
     @inject('ProductRepository')
     private productRepository: IProductRepository
   ) {}
@@ -19,21 +19,21 @@ class UpdateProductInfoService {
     product_id: number,
     info_id: number,
     changes: IChanges
-  ): Promise<ProductInfo> {
+  ): Promise<ProductOption> {
     const productExists = await this.productRepository.findById(product_id);
 
     if (!productExists) {
       throw new NotFound('O produto nao existe');
     }
 
-    const infoExists = await this.productInfoRepository.findById(info_id);
+    const infoExists = await this.productOptionsRepository.findById(info_id);
 
     if (!infoExists) {
       throw new NotFound('A informação não existe');
     }
 
     const thereIsRelation =
-      await this.productInfoRepository.infoBelongToProduct(
+      await this.productOptionsRepository.infoBelongToProduct(
         productExists,
         info_id
       );
@@ -44,7 +44,8 @@ class UpdateProductInfoService {
 
     Object.assign(infoExists, changes);
 
-    const updatedProduct = await this.productInfoRepository.update(infoExists);
+    const updatedProduct =
+      await this.productOptionsRepository.update(infoExists);
 
     if (!updatedProduct) {
       throw new InternalServerError(
@@ -56,4 +57,4 @@ class UpdateProductInfoService {
   }
 }
 
-export { UpdateProductInfoService };
+export { UpdateProductOptionsService };

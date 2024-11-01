@@ -13,14 +13,6 @@ class CreatePersonalDataService {
   ) {}
 
   async execute(persona_data: IPersonalData): Promise<PersonalData> {
-    const personal_name_exists = await this.personalDataRepository.findByName(
-      persona_data.name
-    );
-
-    if (personal_name_exists) {
-      throw new ConflictError('Este nome já está cadastrado!');
-    }
-
     const personal_email_exists = await this.personalDataRepository.findByEmail(
       persona_data.email
     );

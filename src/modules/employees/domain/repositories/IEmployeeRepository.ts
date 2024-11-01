@@ -5,6 +5,7 @@ import { IEmployee } from '../models/IEmployee';
 export interface IEmployeeRepository {
   findById(id: number): Promise<Employee | null>;
   findAll(): Promise<Employee[]>;
+  findByName(name: string): Promise<Employee | null>;
   findByRole(role: string): Promise<Employee | null>;
   findByPersonalData(personal_data: PersonalData): Promise<Employee | null>;
   create(employee: IEmployee): Promise<Employee>;

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { Product } from '../../modules/products/infra/models/Products';
-import { ProductInfo } from '../../modules/products/infra/models/ProductOptions';
+import { ProductOption } from '../../modules/products/infra/models/ProductOptions';
 import { Credential } from '../../modules/auth/infra/models/Credentials';
 import { CreateProducts1718830788772 } from './migrations/1718830788772-CreateProducts';
 import { CreatePersonalData1730300041393 } from './migrations/1730300041393-CreatePersonalData';
@@ -17,7 +17,7 @@ export const data_source = new DataSource({
   username: 'postgres',
   password: 'admin',
   database: 'postgres',
-  entities: [Product, ProductInfo, Credential, PersonalData, Employee],
+  entities: [Product, ProductOption, Credential, PersonalData, Employee],
   synchronize: false,
   migrations: [
     CreateProducts1718830788772,

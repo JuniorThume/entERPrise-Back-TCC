@@ -10,9 +10,8 @@ import { UpdatePersonalDataService } from '../../services/UpdatePersonalDataServ
 
 class PersonalDataController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, cpf, phone, email } = request.body;
+    const { cpf, phone, email } = request.body;
     const received_data: IPersonalData = {
-      name,
       cpf,
       phone: phone ? phone : null,
       email
@@ -32,11 +31,10 @@ class PersonalDataController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const id = Number(request.params.id);
-    const { name, cpf, phone, email } = request.body;
+    const { cpf, phone, email } = request.body;
 
     const received_data: IPersonalData = {
       id,
-      name,
       cpf,
       phone: phone ? phone : null,
       email

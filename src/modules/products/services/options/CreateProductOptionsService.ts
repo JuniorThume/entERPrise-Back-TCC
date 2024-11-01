@@ -1,30 +1,30 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { ProductInfo } from '../../infra/models/ProductOptions';
+import { ProductOption } from '../../infra/models/ProductOptions';
 import { NotFound } from '../../../../shared/errors/NotFound';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import { IProductInfoRepository } from '../../domain/repositories/IProductOptionsRepository';
-import { IProductInfos } from '../../domain/models/IProductOptions';
+import { IProductOptionsRepository } from '../../domain/repositories/IProductOptionsRepository';
+import { IProductOptions } from '../../domain/models/IProductOptions';
 import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 
 @injectable()
-class CreateProductInfoService {
+class CreateProductOptionsService {
   constructor(
     @inject('ProductRepository')
     private productRepository: IProductRepository,
-    @inject('ProductInfoRepository')
-    private productInfoRepository: IProductInfoRepository
+    @inject('ProductOptionsRepository')
+    private productOptionsRepository: IProductOptionsRepository
   ) {}
   async execute(
     product_id: number,
-    product_info: ProductInfo
-  ): Promise<IProductInfos> {
+    product_info: ProductOption
+  ): Promise<IProductOptions> {
     const product = await this.productRepository.findById(product_id);
     if (!product) {
       throw new NotFound('Nao foi possivel encontrar um produto com esse id');
     }
-    const alreadyExists = await this.productInfoRepository.findByFilter({
+    const alreadyExists = await this.productOptionsRepository.findByFilter({
       where: {
         product_id: product,
         size: product_info.size,
@@ -38,7 +38,8 @@ class CreateProductInfoService {
 
     product_info.product_id = product;
 
-    const infoCreated = await this.productInfoRepository.insert(product_info);
+    const infoCreated =
+      await this.productOptionsRepository.insert(product_info);
 
     if (!infoCreated) {
       throw new InternalServerError(
@@ -50,4 +51,4 @@ class CreateProductInfoService {
   }
 }
 
-export { CreateProductInfoService };
+export { CreateProductOptionsService };
