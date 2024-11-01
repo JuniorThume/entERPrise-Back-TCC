@@ -2,7 +2,7 @@ import { DeleteResult, FindManyOptions, Like, Repository } from 'typeorm';
 import { Product } from '../models/Products';
 import { data_source } from '../../../../shared/typeorm/dataSource';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import { ProductInfo } from '../models/ProductInfos';
+import { ProductInfo } from '../models/ProductOptions';
 import { IFilterProduct } from '../../domain/models/IFilterProduct';
 import { IPaginate } from '../../domain/models/IPaginate';
 

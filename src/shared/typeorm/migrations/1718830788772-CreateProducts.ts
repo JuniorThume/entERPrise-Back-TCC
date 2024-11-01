@@ -66,7 +66,7 @@ export class CreateProducts1718830788772 implements MigrationInterface {
 
     await queryRunner.createTable(
       new Table({
-        name: 'product_infos',
+        name: 'product_details',
         columns: [
           {
             name: 'id',
@@ -110,7 +110,7 @@ export class CreateProducts1718830788772 implements MigrationInterface {
       })
     );
     await queryRunner.createForeignKey(
-      'product_infos',
+      'product_details',
       new TableForeignKey({
         columnNames: ['product_id'],
         referencedTableName: 'products',
@@ -121,8 +121,8 @@ export class CreateProducts1718830788772 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('products', 'infos_id');
-    await queryRunner.dropTable('product_infos');
+    await queryRunner.dropForeignKey('products', 'details_id');
+    await queryRunner.dropTable('product_details');
     await queryRunner.dropTable('products');
   }
 }

@@ -7,7 +7,7 @@ import {
   show_product_validator,
   update_product_validator
 } from '../validation/ProductValidation';
-import infosRouter from './infos.routes';
+import infosRouter from './options.routes';
 const router = Router();
 const productsController = new ProductController();
 

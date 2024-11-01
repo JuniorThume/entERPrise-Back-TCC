@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
-import { ProductInfoRepository } from '../../infra/repositories/ProductInfoRepository';
+import { ProductInfoRepository } from '../../infra/repositories/ProductOptionsRepository';
 import { ProductRepository } from '../../infra/repositories/ProductRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
-import { ProductInfo } from '../../infra/models/ProductInfos';
+import { ProductInfo } from '../../infra/models/ProductOptions';
 
 @injectable()
 class ShowProductInfoService {

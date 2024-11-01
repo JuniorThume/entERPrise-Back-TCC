@@ -1,5 +1,5 @@
 import './container/index';
-import 'express-async-errors';
+// import 'express-async-errors';
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes/index';

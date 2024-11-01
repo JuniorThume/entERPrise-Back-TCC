@@ -1,6 +1,6 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 
-export const create_info_product_validation = celebrate({
+export const create_options_product_validation = celebrate({
   [Segments.BODY]: Joi.object()
     .keys({
       size: Joi.string().min(1).max(4).required(),
@@ -12,7 +12,7 @@ export const create_info_product_validation = celebrate({
   [Segments.PARAMS]: Joi.object().unknown(false)
 });
 
-export const update_product_info_validator = celebrate(
+export const update_product_options_validator = celebrate(
   {
     [Segments.BODY]: Joi.object()
       .keys({
@@ -31,7 +31,7 @@ export const update_product_info_validator = celebrate(
   { abortEarly: false }
 );
 
-export const list_product_info_validator = celebrate({
+export const list_product_options_validator = celebrate({
   [Segments.QUERY]: Joi.object({
     size: Joi.string().optional(),
     quantity: Joi.number().optional(),
@@ -44,7 +44,7 @@ export const list_product_info_validator = celebrate({
   }
 });
 
-export const show_product_info_validator = celebrate({
+export const show_product_options_validator = celebrate({
   [Segments.PARAMS]: {
     id: Joi.number().required(),
     product_id: Joi.number().required()
@@ -53,7 +53,7 @@ export const show_product_info_validator = celebrate({
   [Segments.BODY]: Joi.object({}).unknown(false)
 });
 
-export const delete_product_info_validator = celebrate({
+export const delete_product_options_validator = celebrate({
   [Segments.PARAMS]: {
     id: Joi.number().required(),
     product_id: Joi.number().required()

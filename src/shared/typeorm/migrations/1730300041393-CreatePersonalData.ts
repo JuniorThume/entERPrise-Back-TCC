@@ -20,12 +20,6 @@ export class CreatePersonalData1730300041393 implements MigrationInterface {
             isUnique: true
           },
           {
-            name: 'name',
-            type: 'varchar',
-            length: '255',
-            isNullable: false
-          },
-          {
             name: 'email',
             type: 'varchar',
             length: '255',
@@ -56,7 +50,7 @@ export class CreatePersonalData1730300041393 implements MigrationInterface {
     );
 
     await queryRunner.query(
-      `INSERT INTO personal_data ("cpf", "name", "email") values ('00000000000', 'administrator', 'admin@teste.com');`
+      `INSERT INTO personal_data ("cpf", "email") values ('00000000000', 'admin@teste.com');`
     );
   }
 

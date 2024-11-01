@@ -54,7 +54,7 @@ export class CreateCredential1730314378971 implements MigrationInterface {
     );
 
     await queryRunner.query(
-      `INSERT INTO employees ("personal_data_id", "role" ) values ('1', 'admin')`
+      `INSERT INTO employees ("personal_data", "role", "name" ) values ('1', 'admin', 'administrator')`
     );
 
     const hash_password = await bcrypt.hash('@adm1nP4ssW0rd', 10);

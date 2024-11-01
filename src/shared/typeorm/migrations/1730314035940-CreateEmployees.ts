@@ -18,7 +18,11 @@ export class CreateEmployees1730314035940 implements MigrationInterface {
             isGenerated: true
           },
           {
-            name: 'personal_data_id',
+            name: 'name',
+            type: 'varchar'
+          },
+          {
+            name: 'personal_data',
             type: 'integer',
             isNullable: true,
             isUnique: true
@@ -49,7 +53,7 @@ export class CreateEmployees1730314035940 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'employees',
       new TableForeignKey({
-        columnNames: ['personal_data_id'],
+        columnNames: ['personal_data'],
         referencedTableName: 'personal_data',
         referencedColumnNames: ['id']
       })

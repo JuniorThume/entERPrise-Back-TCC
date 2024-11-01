@@ -31,7 +31,9 @@ class CredentialRepository implements ICredentialRepository {
   }
 
   public async findById(id: number): Promise<Credential | null> {
-    return this.ormCredentialRepository.findOne({ where: { id: id } });
+    return this.ormCredentialRepository.findOne({
+      where: { employee_id: { id } }
+    });
   }
 
   public async findCredential(

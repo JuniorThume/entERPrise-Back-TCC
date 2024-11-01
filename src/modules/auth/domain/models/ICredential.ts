@@ -1,5 +1,7 @@
+import { IEmployee } from '../../../employees/domain/models/IEmployee';
+
 export interface ICredential {
-  id?: number;
+  employee_id?: IEmployee;
   username: string;
   password: string;
 }

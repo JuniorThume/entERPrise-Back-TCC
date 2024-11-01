@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { DeleteResult } from 'typeorm';
 import { NotFound } from '../../../../shared/errors/NotFound';
-import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
+import { IProductInfoRepository } from '../../domain/repositories/IProductOptionsRepository';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 
 @injectable()

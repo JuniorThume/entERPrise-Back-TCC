@@ -1,9 +1,9 @@
 import { DeleteResult, FindManyOptions } from 'typeorm';
-import { ProductInfo } from '../../infra/models/ProductInfos';
-import { IProductInfos } from '../models/IProductInfos';
+import { ProductInfo } from '../../infra/models/ProductOptions';
+import { IProductInfos } from '../models/IProductOptions';
 import { Product } from '../../infra/models/Products';
 
-export interface IProductInfoRepository {
+export interface IProductOptionsRepository {
   insert(product_info: IProductInfos): Promise<ProductInfo | null>;
   update(info: IProductInfos): Promise<ProductInfo | null>;
   delete(id: number): Promise<DeleteResult>;

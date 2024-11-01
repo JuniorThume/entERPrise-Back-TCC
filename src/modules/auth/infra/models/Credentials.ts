@@ -1,11 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ICredential } from '../../domain/models/ICredential';
 import { Exclude } from 'class-transformer';
+import { Employee } from '../../../employees/infra/models/Employee';
 
 @Entity('credentials')
 class Credential implements ICredential {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  employee_id: Employee;
 
   @Column('varchar')
   username: string;

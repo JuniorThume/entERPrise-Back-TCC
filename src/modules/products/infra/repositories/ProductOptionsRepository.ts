@@ -1,12 +1,12 @@
 import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
 import { data_source } from '../../../../shared/typeorm/dataSource';
-import { IProductInfos } from '../../domain/models/IProductInfos';
-import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
-import { ProductInfo } from '../models/ProductInfos';
+import { IProductInfos } from '../../domain/models/IProductOptions';
+import { IProductOptionsRepository } from '../../domain/repositories/IProductOptionsRepository';
+import { ProductInfo } from '../models/ProductOptions';
 import { IFilterInfo } from '../../domain/models/IFilterInfo';
 import { Product } from '../models/Products';
 
-class ProductInfoRepository implements IProductInfoRepository {
+class ProductOptionsRepository implements IProductOptionsRepository {
   private ormProductInfoRepository: Repository<ProductInfo>;
   constructor() {
     this.ormProductInfoRepository = data_source.getRepository(ProductInfo);
@@ -75,4 +75,4 @@ class ProductInfoRepository implements IProductInfoRepository {
   }
 }
 
-export { ProductInfoRepository };
+export { ProductOptionsRepository };

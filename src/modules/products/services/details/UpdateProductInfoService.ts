@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
-import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
+import { IProductInfoRepository } from '../../domain/repositories/IProductOptionsRepository';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
-import { ProductInfo } from '../../infra/models/ProductInfos';
+import { ProductInfo } from '../../infra/models/ProductOptions';
 import { IChanges } from '../../domain/models/IChanges';
 import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 

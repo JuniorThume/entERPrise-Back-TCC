@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
-import { ProductInfoRepository } from '../../infra/repositories/ProductInfoRepository';
-import { ProductInfo } from '../../infra/models/ProductInfos';
+import { ProductInfoRepository } from '../../infra/repositories/ProductOptionsRepository';
+import { ProductInfo } from '../../infra/models/ProductOptions';
 import { ProductRepository } from '../../infra/repositories/ProductRepository';
 import { NotFound } from '../../../../shared/errors/NotFound';
 

@@ -5,11 +5,11 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { IProductInfos } from '../../domain/models/IProductInfos';
+import { IProductInfos } from '../../domain/models/IProductOptions';
 import { Product } from './Products';
 import { Exclude } from 'class-transformer';
 
-@Entity('product_infos')
+@Entity('product_options')
 class ProductInfo implements IProductInfos {
   @PrimaryGeneratedColumn('increment')
   id: number;

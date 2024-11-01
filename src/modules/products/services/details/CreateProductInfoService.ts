@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { ProductInfo } from '../../infra/models/ProductInfos';
+import { ProductInfo } from '../../infra/models/ProductOptions';
 import { NotFound } from '../../../../shared/errors/NotFound';
 import { BadRequest } from '../../../../shared/errors/BadRequest';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
-import { IProductInfoRepository } from '../../domain/repositories/IProductInfoRepository';
-import { IProductInfos } from '../../domain/models/IProductInfos';
+import { IProductInfoRepository } from '../../domain/repositories/IProductOptionsRepository';
+import { IProductInfos } from '../../domain/models/IProductOptions';
 import { InternalServerError } from '../../../../shared/errors/InternalServerError';
 
 @injectable()

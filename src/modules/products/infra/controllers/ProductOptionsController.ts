@@ -7,9 +7,9 @@ import { ShowProductInfoService } from '../../services/details/ShowProductInfoSe
 import { ListProductInfoService } from '../../services/details/ListProductInfoService';
 import { UpdateProductInfoService } from '../../services/details/UpdateProductInfoService';
 import { plainToInstance } from 'class-transformer';
-import { ProductInfo } from '../models/ProductInfos';
+import { ProductInfo } from '../models/ProductOptions';
 
-class ProductInfoController {
+class ProductOptionsController {
   public async insert(request: Request, response: Response): Promise<Response> {
     const product_id = Number(request.params.product_id);
     const infos = request.body;
@@ -84,4 +84,4 @@ class ProductInfoController {
   }
 }
 
-export { ProductInfoController };
+export { ProductOptionsController };

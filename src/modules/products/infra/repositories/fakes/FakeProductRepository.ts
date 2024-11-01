@@ -1,6 +1,6 @@
 import { DeleteResult } from 'typeorm';
 import { IProductRepository } from '../../../domain/repositories/IProductRepository';
-import { ProductInfo } from '../../models/ProductInfos';
+import { ProductInfo } from '../../models/ProductOptions';
 import { Product } from '../../models/Products';
 import { IFilterProduct } from '../../../domain/models/IFilterProduct';
 
