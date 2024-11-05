@@ -3,6 +3,8 @@ import { data_source } from '../../../../shared/typeorm/dataSource';
 import { ICredentialRepository } from '../../domain/repositories/ICredentialRepository';
 import { Credential } from '../models/Credentials';
 import { ICredential } from '../../domain/models/ICredential';
+import { IEmployee } from '../../../employees/domain/models/IEmployee';
+import bcrypt from 'bcrypt';
 
 class CredentialRepository implements ICredentialRepository {
   public ormCredentialRepository: Repository<Credential>;
@@ -10,12 +12,15 @@ class CredentialRepository implements ICredentialRepository {
     this.ormCredentialRepository = data_source.getRepository(Credential);
   }
   public async createCredential(
+    employee: IEmployee,
     username: string,
     password: string
   ): Promise<Credential | null> {
+    const hash_password = await bcrypt.hash(password, 10);
     const new_credential = this.ormCredentialRepository.create({
+      employee_id: employee.id,
       username,
-      password
+      password: hash_password
     });
 
     const credential = await this.ormCredentialRepository.save(new_credential);
@@ -24,15 +29,28 @@ class CredentialRepository implements ICredentialRepository {
     return credential;
   }
 
+  public async findAll(): Promise<Credential[]> {
+    return await this.ormCredentialRepository.find({
+      relations: ['employee']
+    });
+  }
+
+  public async findByEmployee(employee: IEmployee): Promise<Credential | null> {
+    return await this.ormCredentialRepository
+      .createQueryBuilder('credentials')
+      .setFindOptions({ where: { employee_id: employee.id } })
+      .getOne();
+  }
+
   public async findByUsername(username: string): Promise<Credential | null> {
     return await this.ormCredentialRepository.findOne({
-      where: { username: username }
+      where: { username }
     });
   }
 
   public async findById(id: number): Promise<Credential | null> {
     return this.ormCredentialRepository.findOne({
-      where: { employee_id: { id } }
+      where: { employee: { id } }
     });
   }
 
@@ -40,15 +58,16 @@ class CredentialRepository implements ICredentialRepository {
     credential: ICredential
   ): Promise<Credential | null> {
     return await this.ormCredentialRepository.findOne({
-      where: credential
+      where: {
+        username: credential.username,
+        password: credential.password
+      }
     });
   }
 
-  public async updatePassword(
-    creadential: Credential,
-    new_password: string
+  public async updateCredential(
+    creadential: Credential
   ): Promise<Credential | null> {
-    creadential.password = new_password;
     return await this.ormCredentialRepository.save(creadential);
   }
 

@@ -11,7 +11,7 @@ export interface IProductOptionsRepository {
   findByProduct(
     product: Product,
     filter: IFilterOption
-  ): Promise<ProductOption[] | null>;
+  ): Promise<Product | null>;
   findByFilter(options: FindManyOptions): Promise<ProductOption[]>;
   findById(id: number): Promise<ProductOption | null>;
   findBySize(size: string): Promise<ProductOption[] | null>;

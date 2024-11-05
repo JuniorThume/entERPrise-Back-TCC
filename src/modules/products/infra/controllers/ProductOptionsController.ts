@@ -6,7 +6,7 @@ import { RemoveProductOptionsService } from '../../services/options/RemoveProduc
 import { ShowProductOptionsService } from '../../services/options/ShowProductOptionsService';
 import { ListProductOptionsService } from '../../services/options/ListProductOptionsService';
 import { UpdateProductOptionsService } from '../../services/options/UpdateProductOptionsService';
-import { plainToInstance } from 'class-transformer';
+import { instanceToInstance, plainToInstance } from 'class-transformer';
 import { ProductOption } from '../models/ProductOptions';
 
 class ProductOptionsController {
@@ -28,13 +28,10 @@ class ProductOptionsController {
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
-    const infoRepository = container.resolve(ListProductOptionsService);
+    const optionsRepository = container.resolve(ListProductOptionsService);
     const { product_id } = request.params;
-    const infos = await infoRepository.execute(Number(product_id));
-
-    return response
-      .status(status_code.OK)
-      .json(plainToInstance(ProductOption, infos));
+    const options = await optionsRepository.execute(Number(product_id));
+    return response.status(status_code.OK).json(instanceToInstance(options));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {

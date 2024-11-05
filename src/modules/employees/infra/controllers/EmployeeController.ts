@@ -12,14 +12,10 @@ import { IEmployee } from '../../domain/models/IEmployee';
 
 class EmployeeController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { role, name, personal_data_id } = request.body;
+    const { role, name } = request.body;
     const createEmployeeService = container.resolve(CreateEmployeeService);
 
-    const created_employee = await createEmployeeService.execute(
-      Number(personal_data_id),
-      role,
-      name
-    );
+    const created_employee = await createEmployeeService.execute(role, name);
     if (!created_employee) {
       throw new InternalServerError(
         'Algo ocorreu e não foi possível concluir o cadastro do funcionário'

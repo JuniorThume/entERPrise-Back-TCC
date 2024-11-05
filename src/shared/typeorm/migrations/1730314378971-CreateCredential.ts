@@ -15,7 +15,8 @@ export class CreateCredential1730314378971 implements MigrationInterface {
           {
             name: 'employee_id',
             type: 'integer',
-            isPrimary: true
+            isPrimary: true,
+            isUnique: true
           },
           {
             name: 'username',

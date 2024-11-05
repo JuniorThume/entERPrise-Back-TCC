@@ -26,14 +26,15 @@ class ProductOption implements IProductOptions {
   @Column('decimal')
   price: number;
 
-  @Exclude({ toClassOnly: true })
   @ManyToOne(() => Product, (product) => product.id)
   @JoinColumn({ name: 'product_id' })
   product_id: Product;
 
+  @Exclude()
   @Column('timestamp with time zone')
   created_at: Date;
 
+  @Exclude()
   @Column('timestamp with time zone')
   updated_at: Date;
 }

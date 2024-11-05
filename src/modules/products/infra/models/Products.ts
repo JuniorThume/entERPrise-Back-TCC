@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ProductOption } from './ProductOptions';
 import { IProduct } from '../../domain/models/IProduct';
+import { Exclude } from 'class-transformer';
 
 @Entity('products')
 class Product implements IProduct {
@@ -29,11 +30,13 @@ class Product implements IProduct {
   brand: string;
 
   @OneToMany(() => ProductOption, (options) => options.product_id)
-  infos: ProductOption[];
+  options: ProductOption[];
 
+  @Exclude()
   @Column('timestamp with time zone')
   created_at: Date;
 
+  @Exclude()
   @Column('timestamp with time zone')
   updated_at: Date;
 }

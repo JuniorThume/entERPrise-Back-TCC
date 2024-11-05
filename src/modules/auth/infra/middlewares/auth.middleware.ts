@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { UnauthorizedError } from '../../../../shared/errors/UnauthorizedError';
 import jwt, { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { SECRET_KEY } from '../../../../shared/consts/secret';
-export const authMiddleware = (
+export const authenticationMiddleware = (
   request: Request,
   response: Response,
   next: NextFunction

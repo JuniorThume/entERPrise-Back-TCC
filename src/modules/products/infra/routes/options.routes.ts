@@ -12,30 +12,30 @@ const router = Router();
 const productoptionsController = new ProductOptionsController();
 
 router.post(
-  '/:product_id/optionss',
+  '/:product_id/options',
   create_options_product_validation,
   productoptionsController.insert
 );
 
 router.put(
-  '/:product_id/optionss/:id',
+  '/:product_id/options/:id',
   update_product_options_validator,
   productoptionsController.update
 );
 router.get(
-  '/:product_id/optionss/:id',
+  '/:product_id/options/:id',
   show_product_options_validator,
   productoptionsController.show
 );
 
 router.get(
-  '/:product_id/optionss',
+  '/:product_id/options',
   list_product_options_validator,
   productoptionsController.list
 );
 
 router.delete(
-  '/:product_id/optionss/:id',
+  '/:product_id/options/:id',
   delete_product_options_validator,
   productoptionsController.delete
 );

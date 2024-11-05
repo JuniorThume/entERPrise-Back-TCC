@@ -28,7 +28,6 @@ class Employee implements IEmployee {
   @Column('timestamp with time zone')
   updated_at: Date;
 
-  // @Exclude({ toClassOnly: true })
   @OneToOne(() => PersonalData, (personal_data) => personal_data.id)
   @JoinColumn({ name: 'personal_data' })
   personal_data: PersonalData;

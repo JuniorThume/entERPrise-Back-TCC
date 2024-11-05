@@ -14,26 +14,29 @@ class RemoveProductOptionsService {
   ) {}
   public async execute(
     product_id: number,
-    info_id: number
+    option_id: number
   ): Promise<DeleteResult> {
-    const productExists = await this.productRepository.findById(product_id);
-    if (!productExists) {
-      throw new NotFound('O produto nao existe');
+    const product_exists = await this.productRepository.findById(product_id);
+    if (!product_exists) {
+      throw new NotFound('Produto não encontrado');
     }
 
-    const infoExists = await this.productOptionsRepository.findById(info_id);
+    const option_exists =
+      await this.productOptionsRepository.findById(option_id);
 
-    if (!infoExists) {
-      throw new NotFound('Optionsrmação não existe no produto definido');
+    if (!option_exists) {
+      throw new NotFound('A opção não existe no produto definido');
     }
+    console.log(product_exists);
+    console.log(option_exists);
 
-    if (infoExists?.product_id !== productExists) {
+    if (option_exists?.product_id.id !== product_exists.id) {
       throw new NotFound('O produto e a informação não se relacionam');
     }
 
-    const infoDeleted = await this.productOptionsRepository.delete(info_id);
+    const optionDeleted = await this.productOptionsRepository.delete(option_id);
 
-    return infoDeleted;
+    return optionDeleted;
   }
 }
 

@@ -36,9 +36,9 @@ class ProductController {
   }
 
   public async list(request: Request, response: Response): Promise<Response> {
-    const filter = request.query;
-    const page = parseInt(filter.page as string) || 1;
-    const limit = parseInt(filter.limit as string) || 5;
+    const filter = request?.query;
+    const page = Number(filter?.page as string) || 1;
+    const limit = Number(filter?.limit as string) || 5;
     const listProductService = container.resolve(ListProductService);
     const products = await listProductService.execute(filter, limit, page);
 

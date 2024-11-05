@@ -50,18 +50,16 @@ export class ProductRepository implements IProductRepository {
     limit: number,
     page: number
   ): Promise<IPaginate> {
+    console.log(filter);
     const skip = (page - 1) * limit;
     const options: FindManyOptions = {
       where: {
         name: filter.name ? Like(`%${filter?.name}%`) : null,
-        description: filter.description
-          ? Like(`%${filter?.description}%`)
-          : null,
         material: filter.material ? Like(`%${filter?.material}%`) : null,
         brand: filter.brand ? Like(`%${filter?.brand}%`) : null,
         category: filter.category ? Like(`%${filter?.category}%`) : null
       },
-      relations: ['infos']
+      relations: ['options']
     };
 
     const [products, total_products] = await this.ormProductRepository
@@ -86,7 +84,7 @@ export class ProductRepository implements IProductRepository {
   public async findById(product_id: number): Promise<Product | null> {
     const product = await this.ormProductRepository.findOne({
       where: { id: product_id },
-      relations: ['infos']
+      relations: ['options']
     });
 
     return product;
@@ -95,7 +93,7 @@ export class ProductRepository implements IProductRepository {
   public async findByName(name: string): Promise<Product | null> {
     const product = await this.ormProductRepository.findOne({
       where: { name: name },
-      relations: ['infos']
+      relations: ['options']
     });
 
     return product;
@@ -106,7 +104,7 @@ export class ProductRepository implements IProductRepository {
   ): Promise<Product[] | null> {
     const product = await this.ormProductRepository.find({
       where: { description: Like(`%${description}%`) },
-      relations: ['infos']
+      relations: ['options']
     });
     return product;
   }

@@ -8,14 +8,15 @@ import { Product } from '../models/Products';
 
 class ProductOptionsRepository implements IProductOptionsRepository {
   private ormProductOptionsRepository: Repository<ProductOption>;
+  private ormProductsRepository: Repository<Product>;
   constructor() {
     this.ormProductOptionsRepository = data_source.getRepository(ProductOption);
+    this.ormProductsRepository = data_source.getRepository(Product);
   }
 
   async insert(product_info: IProductOptions): Promise<ProductOption | null> {
     const infoCreated =
       await this.ormProductOptionsRepository.save(product_info);
-    console.log(infoCreated);
     return infoCreated;
   }
 
@@ -34,9 +35,9 @@ class ProductOptionsRepository implements IProductOptionsRepository {
 
   async findById(id: number): Promise<ProductOption | null> {
     const info = await this.ormProductOptionsRepository.findOne({
-      where: { id: id }
+      where: { id: id },
+      relations: ['product_id']
     });
-
     return info;
   }
 
@@ -49,11 +50,12 @@ class ProductOptionsRepository implements IProductOptionsRepository {
   async findByProduct(
     product: Product,
     filter: IFilterOption
-  ): Promise<ProductOption[] | null> {
-    const options = Object.assign({}, filter, { product_id: product });
-
-    const infos = await this.ormProductOptionsRepository.find({
-      where: options
+  ): Promise<Product | null> {
+    const options = Object.assign({}, filter, { id: product.id });
+    console.log(options);
+    const infos = await this.ormProductsRepository.findOne({
+      where: { options },
+      relations: ['options']
     });
 
     return infos;

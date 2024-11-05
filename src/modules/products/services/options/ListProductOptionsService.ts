@@ -19,7 +19,7 @@ class ListProductOptionsService {
     if (!product) {
       throw new NotFound('Produto nao encontrado');
     }
-    return await this.productOptionsRepository.findByProduct(product, {});
+    return product.options;
   }
 }
 

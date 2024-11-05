@@ -30,7 +30,7 @@ class EmployeeRepository implements IEmployeeRepository {
   }
 
   public async findById(id: number): Promise<Employee | null> {
-    return await this.ormEmployeeRepository.findOneBy({ id });
+    return await this.ormEmployeeRepository.findOne({ where: { id } });
   }
 
   public async findByRole(role: string): Promise<Employee | null> {
@@ -52,7 +52,10 @@ class EmployeeRepository implements IEmployeeRepository {
   }
 
   public async delete(employee: IEmployee): Promise<void> {
-    await this.ormEmployeeRepository.delete(employee);
+    await this.ormEmployeeRepository.delete({
+      id: employee.id
+    });
+    return;
   }
 }
 
