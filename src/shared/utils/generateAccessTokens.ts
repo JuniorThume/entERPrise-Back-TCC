@@ -1,4 +1,4 @@
-import { ICredential } from '../../modules/auth/domain/models/ICredential';
+import { ICredential } from '../../modules/credentials/domain/models/ICredential';
 import jwt from 'jsonwebtoken';
 import { SECRET_KEY } from '../consts/secret';
 export const generateAccessTokens = (credential: ICredential) => {

@@ -2,7 +2,7 @@ import { UnauthorizedError } from '../../../shared/errors/UnauthorizedError';
 import { inject, injectable } from 'tsyringe';
 import { CredentialRepository } from '../infra/repositories/CredentialRepository';
 import { generateAccessTokens } from '../../../shared/utils/generateAccessTokens';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 interface ILoginData {
   username: string;
   password: string;

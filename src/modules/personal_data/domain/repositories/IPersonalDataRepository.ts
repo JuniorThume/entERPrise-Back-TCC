@@ -6,6 +6,9 @@ export interface IPersonalDataRepository {
   findByEmail(email: string): Promise<PersonalData | null>;
   findByCPF(cpf: string): Promise<PersonalData | null>;
   create(personal_data: IPersonalData): Promise<PersonalData>;
-  update(personal_data: IPersonalData): Promise<PersonalData>;
+  update(
+    personal_data_altered: IPersonalData,
+    personal_data_original: PersonalData
+  ): Promise<PersonalData>;
   delete(personal_data: IPersonalData): Promise<void>;
 }

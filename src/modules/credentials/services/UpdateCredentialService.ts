@@ -4,9 +4,10 @@ import { Credential } from '../infra/models/Credentials';
 import { ConflictError } from '../../../shared/errors/ConflictError';
 import { EmployeeRepository } from '../../employees/infra/repositories/EmployeeRepository';
 import { NotFound } from '../../../shared/errors/NotFound';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { BadRequest } from '../../../shared/errors/BadRequest';
 import { InternalServerError } from '../../../shared/errors/InternalServerError';
+import { UnauthorizedError } from '@app/errors/UnauthorizedError';
 
 interface IBody {
   username?: string;
@@ -57,7 +58,7 @@ export class UpdateCredentialService {
       if (
         !(await bcrypt.compare(body.old_password, credential_exists.password))
       ) {
-        throw new BadRequest('A senha está incorreta');
+        throw new UnauthorizedError('A senha está incorreta');
       }
       if (body.new_password) {
         if (

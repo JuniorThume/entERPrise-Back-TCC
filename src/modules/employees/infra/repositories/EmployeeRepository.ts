@@ -7,11 +7,9 @@ import { PersonalData } from '../../../personal_data/infra/models/PersonalData';
 
 class EmployeeRepository implements IEmployeeRepository {
   private ormEmployeeRepository: Repository<Employee>;
-  private ormPersonalDataRepository: Repository<PersonalData>;
 
   constructor() {
     this.ormEmployeeRepository = data_source.getRepository(Employee);
-    this.ormPersonalDataRepository = data_source.getRepository(PersonalData);
   }
 
   public async findByPersonalData(
@@ -30,7 +28,10 @@ class EmployeeRepository implements IEmployeeRepository {
   }
 
   public async findById(id: number): Promise<Employee | null> {
-    return await this.ormEmployeeRepository.findOne({ where: { id } });
+    return await this.ormEmployeeRepository.findOne({
+      where: { id },
+      relations: ['personal_data']
+    });
   }
 
   public async findByRole(role: string): Promise<Employee | null> {
@@ -47,8 +48,18 @@ class EmployeeRepository implements IEmployeeRepository {
     return await this.ormEmployeeRepository.save(employee);
   }
 
-  public async update(employee: IEmployee): Promise<Employee> {
-    return await this.ormEmployeeRepository.save(employee);
+  public async update(
+    employee_altered: Employee,
+    employee_original: Employee
+  ): Promise<Employee> {
+    const merged_employee = this.ormEmployeeRepository.merge(
+      employee_original,
+      employee_altered
+    );
+
+    const updated_employee =
+      await this.ormEmployeeRepository.save(merged_employee);
+    return updated_employee;
   }
 
   public async delete(employee: IEmployee): Promise<void> {

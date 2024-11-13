@@ -8,7 +8,6 @@ import { DeleteEmployeeService } from '../../services/DeleteEmployeeService';
 import { ListEmployeeService } from '../../services/ListEmloyeeService';
 import { ShowEmployeeService } from '../../services/ShowEmployeeService';
 import { UpdateEmployeeService } from '../../services/UpdateEmployeeService';
-import { IEmployee } from '../../domain/models/IEmployee';
 
 class EmployeeController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -48,14 +47,14 @@ class EmployeeController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const employee_changes: IEmployee = {
-      ...request.body
-    };
+
     const updateEmployeeService = container.resolve(UpdateEmployeeService);
 
-    await updateEmployeeService.execute(Number(id), employee_changes);
-
-    return response.status(status_code.NO_CONTENT).json();
+    const updated_employee = await updateEmployeeService.execute(
+      Number(id),
+      request.body
+    );
+    return response.status(status_code.CREATED).json(updated_employee);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {

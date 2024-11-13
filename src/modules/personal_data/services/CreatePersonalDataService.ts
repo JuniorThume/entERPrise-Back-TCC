@@ -14,7 +14,7 @@ class CreatePersonalDataService {
 
   async execute(persona_data: IPersonalData): Promise<PersonalData> {
     const personal_email_exists = await this.personalDataRepository.findByEmail(
-      persona_data.email
+      persona_data.email as string
     );
 
     if (personal_email_exists) {
@@ -22,7 +22,7 @@ class CreatePersonalDataService {
     }
 
     const personal_cpf_exists = await this.personalDataRepository.findByCPF(
-      persona_data.cpf
+      persona_data.cpf as string
     );
 
     if (personal_cpf_exists) {

@@ -1,6 +1,6 @@
 import { DeleteResult, FindManyOptions, Like, Repository } from 'typeorm';
 import { Product } from '../models/Products';
-import { data_source } from '../../../../shared/typeorm/dataSource';
+import { data_source } from '@typeorm/dataSource';
 import { IProductRepository } from '../../domain/repositories/IProductRepository';
 import { ProductOption } from '../models/ProductOptions';
 import { IFilterProduct } from '../../domain/models/IFilterProduct';
@@ -50,7 +50,6 @@ export class ProductRepository implements IProductRepository {
     limit: number,
     page: number
   ): Promise<IPaginate> {
-    console.log(filter);
     const skip = (page - 1) * limit;
     const options: FindManyOptions = {
       where: {
@@ -68,6 +67,7 @@ export class ProductRepository implements IProductRepository {
       .skip(skip)
       .take(limit)
       .getManyAndCount();
+    console.log(products);
 
     const total_pages = Math.ceil(total_products / limit);
     const result: IPaginate = {

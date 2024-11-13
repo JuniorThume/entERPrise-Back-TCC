@@ -16,14 +16,14 @@ export class CreatePersonalData1730300041393 implements MigrationInterface {
             name: 'cpf',
             type: 'varchar',
             length: '11',
-            isNullable: false,
+            isNullable: true,
             isUnique: true
           },
           {
             name: 'email',
             type: 'varchar',
             length: '255',
-            isNullable: false,
+            isNullable: true,
             isUnique: true
           },
           {

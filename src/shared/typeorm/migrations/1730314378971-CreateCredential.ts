@@ -4,7 +4,7 @@ import {
   Table,
   TableForeignKey
 } from 'typeorm';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export class CreateCredential1730314378971 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

@@ -13,7 +13,7 @@ class PersonalDataRepository implements IPersonalDataRepository {
   }
 
   public async findById(id: number): Promise<PersonalData | null> {
-    return await this.ormPersonalDataRepository.findOneBy({ id });
+    return await this.ormPersonalDataRepository.findOne({ where: { id: id } });
   }
 
   public async findByEmail(email: string): Promise<PersonalData | null> {
@@ -28,8 +28,18 @@ class PersonalDataRepository implements IPersonalDataRepository {
     return await this.ormPersonalDataRepository.save(personal_data);
   }
 
-  public async update(personal_data: IPersonalData): Promise<PersonalData> {
-    return await this.ormPersonalDataRepository.save(personal_data);
+  public async update(
+    personal_data_altered: IPersonalData,
+    personal_data_original: PersonalData
+  ): Promise<PersonalData> {
+    const merged_personal_data = this.ormPersonalDataRepository.merge(
+      personal_data_original,
+      personal_data_altered
+    );
+
+    const updated_personal_data =
+      await this.ormPersonalDataRepository.save(merged_personal_data);
+    return updated_personal_data;
   }
 
   public async delete(personal_data: IPersonalData): Promise<void> {

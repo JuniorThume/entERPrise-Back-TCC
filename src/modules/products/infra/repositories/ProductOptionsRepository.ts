@@ -52,7 +52,6 @@ class ProductOptionsRepository implements IProductOptionsRepository {
     filter: IFilterOption
   ): Promise<Product | null> {
     const options = Object.assign({}, filter, { id: product.id });
-    console.log(options);
     const infos = await this.ormProductsRepository.findOne({
       where: { options },
       relations: ['options']

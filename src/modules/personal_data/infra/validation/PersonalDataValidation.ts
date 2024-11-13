@@ -4,7 +4,6 @@ export const create_personal_data_validator = celebrate(
   {
     [Segments.BODY]: Joi.object()
       .keys({
-        name: Joi.string().max(100).required(),
         email: Joi.string().email().required(),
         cpf: Joi.string().length(11).required(),
         phone: Joi.string().min(11).max(13).optional()
@@ -20,7 +19,6 @@ export const update_personal_data_validator = celebrate(
   {
     [Segments.BODY]: Joi.object()
       .keys({
-        name: Joi.string().max(100).required(),
         email: Joi.string().email().required(),
         cpf: Joi.string().length(11).required(),
         phone: Joi.string().min(11).max(13).optional()

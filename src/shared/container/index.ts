@@ -4,8 +4,8 @@ import { ProductRepository } from '../../modules/products/infra/repositories/Pro
 import { IProductRepository } from '../../modules/products/domain/repositories/IProductRepository';
 import { IProductOptionsRepository } from '../../modules/products/domain/repositories/IProductOptionsRepository';
 import { ProductOptionsRepository } from '../../modules/products/infra/repositories/ProductOptionsRepository';
-import { ICredentialRepository } from '../../modules/auth/domain/repositories/ICredentialRepository';
-import { CredentialRepository } from '../../modules/auth/infra/repositories/CredentialRepository';
+import { ICredentialRepository } from '../../modules/credentials/domain/repositories/ICredentialRepository';
+import { CredentialRepository } from '../../modules/credentials/infra/repositories/CredentialRepository';
 import { IPersonalDataRepository } from '../../modules/personal_data/domain/repositories/IPersonalDataRepository';
 import { PersonalDataRepository } from '../../modules/personal_data/infra/repositories/PersonalDataRepository';
 import { IEmployeeRepository } from '../../modules/employees/domain/repositories/IEmployeeRepository';

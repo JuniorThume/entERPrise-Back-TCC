@@ -4,7 +4,7 @@ import { ICredentialRepository } from '../../domain/repositories/ICredentialRepo
 import { Credential } from '../models/Credentials';
 import { ICredential } from '../../domain/models/ICredential';
 import { IEmployee } from '../../../employees/domain/models/IEmployee';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 class CredentialRepository implements ICredentialRepository {
   public ormCredentialRepository: Repository<Credential>;

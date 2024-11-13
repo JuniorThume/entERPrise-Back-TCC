@@ -19,20 +19,22 @@ class UpdatePersonalDataService {
     if (!personal_data_exists) {
       throw new NotFound('Dados Pessoais não foram encontrados');
     }
-
-    if (persona_data.email !== personal_data_exists.email) {
-      const personal_email_exists =
-        await this.personalDataRepository.findByEmail(persona_data.email);
-
-      if (personal_email_exists) {
-        throw new ConflictError(
-          'Este email já está cadastrado nos dados de outra pessoa'
-        );
+    if (persona_data.email) {
+      if (persona_data.email !== personal_data_exists.email) {
+        const personal_email_exists =
+          await this.personalDataRepository.findByEmail(persona_data.email);
+        if (personal_email_exists) {
+          throw new ConflictError(
+            'Este email já está cadastrado nos dados de outra pessoa'
+          );
+        }
       }
     }
 
-    const updated_personal_data =
-      await this.personalDataRepository.update(persona_data);
+    const updated_personal_data = await this.personalDataRepository.update(
+      persona_data,
+      personal_data_exists
+    );
 
     return updated_personal_data;
   }

@@ -9,6 +9,9 @@ export interface IEmployeeRepository {
   findByRole(role: string): Promise<Employee | null>;
   findByPersonalData(personal_data: PersonalData): Promise<Employee | null>;
   create(employee: IEmployee): Promise<Employee>;
-  update(employee: IEmployee): Promise<Employee>;
+  update(
+    employee_altered: IEmployee,
+    employee_original: IEmployee
+  ): Promise<Employee>;
   delete(employee: IEmployee): Promise<void>;
 }

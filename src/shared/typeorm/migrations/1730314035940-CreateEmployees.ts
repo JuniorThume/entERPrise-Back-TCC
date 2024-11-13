@@ -19,7 +19,9 @@ export class CreateEmployees1730314035940 implements MigrationInterface {
           },
           {
             name: 'name',
-            type: 'varchar'
+            type: 'varchar',
+            isNullable: true,
+            isUnique: true
           },
           {
             name: 'personal_data',
