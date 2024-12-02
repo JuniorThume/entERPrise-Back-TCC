@@ -67,13 +67,12 @@ export class ProductRepository implements IProductRepository {
       .skip(skip)
       .take(limit)
       .getManyAndCount();
-    console.log(products);
 
     const total_pages = Math.ceil(total_products / limit);
     const result: IPaginate = {
       data: products,
-      current_page: page,
-      total_pages,
+      current_page: total_pages > 0 ? page : null,
+      total_pages: total_pages > 0 ? total_pages : null,
       next_page: page < total_pages ? page + 1 : null,
       previous_page: page > 1 ? page - 1 : null
     };

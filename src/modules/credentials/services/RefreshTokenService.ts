@@ -5,6 +5,7 @@ import { CredentialRepository } from '../infra/repositories/CredentialRepository
 import { SECRET_KEY } from '../../../shared/consts/secret';
 import { NotFound } from '../../../shared/errors/NotFound';
 import { generateAccessTokens } from '../../../shared/utils/generateAccessTokens';
+import { EmployeeRepository } from '@modules/employees/infra/repositories/EmployeeRepository';
 
 type IPayload = JwtPayload & { user: { id: number; username: string } };
 
@@ -12,7 +13,9 @@ type IPayload = JwtPayload & { user: { id: number; username: string } };
 class RefreshTokenService {
   constructor(
     @inject('CredentialRepository')
-    private credentialRepository: CredentialRepository
+    private credentialRepository: CredentialRepository,
+    @inject('EmployeeRepository')
+    private employeeRepository: EmployeeRepository
   ) {}
 
   public async execute(token: string): Promise<string> {
@@ -31,8 +34,15 @@ class RefreshTokenService {
       if (!credential) {
         throw new NotFound('Credenciais não encontrada');
       }
+      const employee = await this.employeeRepository.findById(
+        credential.employee_id
+      );
 
-      const new_token = generateAccessTokens(credential);
+      if (!employee) {
+        throw new NotFound('Funcionário não encontrado');
+      }
+
+      const new_token = generateAccessTokens(credential, employee);
       return new_token;
     }
     throw new UnauthorizedError('Token atual ainda é valido');

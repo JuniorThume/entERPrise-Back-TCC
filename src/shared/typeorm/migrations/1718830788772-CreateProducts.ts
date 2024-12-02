@@ -18,6 +18,10 @@ export class CreateProducts1718830788772 implements MigrationInterface {
             isGenerated: true
           },
           {
+            name: 'code',
+            type: 'varchar'
+          },
+          {
             name: 'name',
             type: 'varchar',
             length: '150'

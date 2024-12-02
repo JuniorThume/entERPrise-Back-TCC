@@ -5,6 +5,7 @@ export const create_product_validator = celebrate(
     [Segments.BODY]: Joi.object()
       .keys({
         name: Joi.string().max(100).required(),
+        code: Joi.string().length(8).required(),
         description: Joi.string().max(255).optional().allow(null, ''),
         category: Joi.string().required(),
         brand: Joi.string().required(),

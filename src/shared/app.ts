@@ -1,5 +1,5 @@
 import './container/index';
-import 'express-async-errors';
+// import 'express-async-errors';
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes/index';
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: 'http://localhost:5173',
-    credentials: true
+    methods: ['GET', 'POST', 'DELETE', 'PUT']
   })
 );
 app.use(express.urlencoded({ extended: true }));

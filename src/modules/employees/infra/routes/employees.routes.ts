@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { EmployeeController } from '../controllers/EmployeeController';
+import CredentialRouter from '@modules/credentials/infra/routes/credentials.routes';
 import {
   create_employee_validator,
   delete_employee_validator,
@@ -11,6 +12,7 @@ const routes = Router();
 
 const employeeController = new EmployeeController();
 
+routes.use('/credentials', CredentialRouter);
 routes.post('/', create_employee_validator, employeeController.create);
 routes.get('/', list_employee_validator, employeeController.list);
 routes.get('/:id', show_employee_validator, employeeController.show);

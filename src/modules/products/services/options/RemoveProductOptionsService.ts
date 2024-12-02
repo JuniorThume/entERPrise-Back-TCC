@@ -27,8 +27,6 @@ class RemoveProductOptionsService {
     if (!option_exists) {
       throw new NotFound('A opção não existe no produto definido');
     }
-    console.log(product_exists);
-    console.log(option_exists);
 
     if (option_exists?.product_id.id !== product_exists.id) {
       throw new NotFound('O produto e a informação não se relacionam');

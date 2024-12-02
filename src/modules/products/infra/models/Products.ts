@@ -11,6 +11,9 @@ class Product implements IProduct {
   @Column('varchar')
   name: string;
 
+  @Column('varchar')
+  code: string;
+
   @Column('bytea')
   image: string | Buffer;
 
