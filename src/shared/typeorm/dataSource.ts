@@ -12,11 +12,11 @@ import { Employee } from '../../modules/employees/infra/models/Employee';
 
 export const data_source = new DataSource({
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'admin',
-  database: 'postgres',
+  host: process.env.POSTGRES_HOST,
+  port: process.env.POSTGRES_PORT ? parseInt(process.env.POSTGRES_PORT) : 5432,
+  username: process.env.POSTGRES_USER || 'postgres',
+  password: process.env.POSTGRES_PASSWORD || 'admin',
+  database: process.env.POSTGRES_DB || 'postgres',
   entities: [Product, ProductOption, Credential, PersonalData, Employee],
   synchronize: false,
   migrations: [
